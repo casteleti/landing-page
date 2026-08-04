@@ -1,0 +1,75 @@
+/*
+  Design tokens — GLP-1 Success Blueprint™ Landing Page
+  Source of truth: Docs/design.md §3 (color), §4 (type), §5 (grid/spacing), §6 (components)
+  Do not introduce values outside this file. Do not use colors/spacing not listed here.
+*/
+
+:root {
+  /* ---- 3.1 Brand palette ---- */
+  --brand-green: #4C6235;
+  --brand-olive: #7C8B33;
+  --brand-dark: #344426;
+  --brand-sage: #8F995E;
+
+  /* ---- 3.2 Neutrals ---- */
+  --bg-main: #F7F5EF;
+  --bg-light: #FCFBF8;
+  --bg-cream: #E1DBCE;
+  --bg-soft-green: #EEF1E7; /* derived: soft-green section variant, design.md §3.6 note */
+  --text-muted: #9D9B95;
+  --text-muted-aa: #6E7167; /* AA-safe alternative for small text per 02-tech-spec §7 — verified ~4.97:1 on white, clears the 4.5:1 normal-text threshold (design.md §3.5 note) */
+  --text-primary: #22251F;
+  --text-secondary: #4A4D47;
+  --white: #FFFFFF;
+
+  /* ---- 3.3 CTA (only orange in the page) ---- */
+  --cta-primary: #C96F3B;
+  --cta-hover: #AD5C31;
+  --cta-soft: #F2D6C4;
+
+  /* ---- 3.4 Semantic ---- */
+  --error: #A64A42;
+  --success: #4C6235;
+
+  /* ---- Borders (derived, used across components) ---- */
+  --border-light: #E5E1D8;
+  --border-brand: #4C6235;
+  --border-input: #D8D5CC;
+
+  /* ---- 4. Typography families ---- */
+  --font-editorial: 'DM Serif Display', 'Lora', 'Libre Baskerville', 'Fraunces', Georgia, serif;
+  --font-functional: 'Inter', 'Manrope', 'Source Sans 3', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ---- 5.4 Spacing scale (8pt system — never use values outside this list) ---- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+
+  /* ---- 5.1 Grid ---- */
+  --container-max: 1240px;
+  --container-min: 1180px;
+
+  /* ---- 6.7 Radius ---- */
+  --radius-button: 11px;
+  --radius-card: 15px;
+  --radius-image: 18px;
+  --radius-badge: 999px;
+
+  /* ---- 6.7 Shadows ---- */
+  --shadow-card: 0 8px 30px rgba(44, 48, 38, 0.05);
+  --shadow-product: 0 20px 50px rgba(38, 45, 28, 0.12);
+  --shadow-header-sticky: 0 4px 20px rgba(44, 48, 38, 0.06);
+  --shadow-cta: 0 8px 20px rgba(70, 45, 30, 0.12);
+
+  /* ---- Motion (design.md §9) ---- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 200ms;
+  --duration-standard: 280ms;
+}

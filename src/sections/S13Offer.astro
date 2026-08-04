@@ -1,0 +1,198 @@
+---
+// SEÇÃO 13 — OFERTA E PREÇO (8 camadas). Docs/01-sections-copy.md SEÇÃO 13
+import Cta from '../components/Cta.astro';
+import Icon from '../components/Icon.astro';
+import { PRICE, COMBINED_VALUE } from '../config';
+
+const recap = [
+  'The complete 4-Phase GLP-1 Success Blueprint™ (80–120 pages)',
+  '10 premium bonus guides covering side effects, protein, muscle, plateaus, recipes & real life',
+  '25+ printable tools: checklists, trackers, SOS cards, decision trees',
+  'Mobile-friendly, printable, US & metric measurements',
+  'Free updates to this edition',
+];
+---
+
+<section id="offer" class="section section--wide bg-dark">
+  <div class="container offer">
+    <div class="offer__card">
+      <ul class="offer__recap">
+        {recap.map((line) => (
+          <li>
+            <Icon name="check" size={16} />
+            <span>{line}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="offer__anchor">Combined Reference Value: ${COMBINED_VALUE}</p>
+
+      <div class="offer__price">
+        <p class="offer__price-today">Today: {PRICE}</p>
+        <p class="offer__price-note">One-time payment</p>
+      </div>
+
+      <Cta label={`Get Instant Access — ${PRICE}`} position="offer" class="offer__cta" />
+
+      <p class="offer__microcopy">
+        <Icon name="lock" size={14} />
+        <span>Secure checkout <span aria-hidden="true">·</span> Instant digital access <span aria-hidden="true">·</span> No subscription — ever</span>
+      </p>
+
+      <div class="offer__payment">
+        <span>Visa</span>
+        <span>Mastercard</span>
+        <span>Amex</span>
+        <span>PayPal</span>
+        <span>Apple Pay</span>
+      </div>
+      <p class="offer__currency">Prices shown in USD</p>
+    </div>
+
+    <p class="offer__guarantee">
+      <Icon name="shield" size={18} />
+      <span>7-Day Satisfaction Guarantee</span>
+    </p>
+
+    <p class="disclaimer offer__disclaimer">
+      Educational product only. Not medical advice. Not affiliated with any pharmaceutical
+      manufacturer. <a href="#footer-disclaimer" class="offer__disclaimer-link">Full disclaimer</a>
+    </p>
+
+    <!-- PROOF SLOT: número real de compradores quando existir (formato: "Joined by 1,247 GLP-1 users" — número exato, nunca redondo/inventado) -->
+  </div>
+</section>
+
+<style>
+  .offer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .offer__card {
+    width: 100%;
+    max-width: 520px;
+    background: var(--white);
+    border-radius: var(--radius-card);
+    padding: var(--space-5) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    box-shadow: var(--shadow-product);
+    text-align: left;
+  }
+
+  .offer__recap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .offer__recap li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--font-functional);
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+
+  .offer__recap :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .offer__anchor {
+    font-family: var(--font-functional);
+    font-size: 15px;
+    color: var(--text-muted-aa);
+    margin: 0;
+    border-top: 1px solid var(--border-light);
+    padding-top: var(--space-2);
+  }
+
+  .offer__price {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .offer__price-today {
+    font-family: var(--font-editorial);
+    font-size: 44px;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .offer__price-note {
+    font-family: var(--font-functional);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  :global(.offer__cta) {
+    width: 100%;
+  }
+
+  .offer__microcopy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .offer__microcopy :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+  }
+
+  .offer__payment {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-family: var(--font-functional);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted-aa);
+    border-top: 1px solid var(--border-light);
+    padding-top: var(--space-2);
+  }
+
+  .offer__currency {
+    font-size: 12px;
+    color: var(--text-muted-aa);
+    margin: -4px 0 0;
+  }
+
+  .offer__guarantee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-editorial);
+    font-size: 18px;
+    color: var(--bg-cream);
+  }
+
+  .offer__guarantee :global(svg) {
+    color: var(--brand-sage);
+  }
+
+  .offer__disclaimer {
+    max-width: 560px;
+    color: var(--bg-cream);
+    opacity: 0.85;
+  }
+
+  .offer__disclaimer-link {
+    text-decoration: underline;
+    color: var(--bg-cream);
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+import { FAQ_ITEMS } from '../content/faq-data';
+import {
+  SITE_URL,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  PRICE_RAW,
+  CURRENCY,
+  BRAND_NAME,
+} from '../config';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  includeProductSchema?: boolean;
+}
+
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  includeProductSchema = true,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL).toString();
+const ogImageURL = new URL('/images/og-image.png', SITE_URL).toString();
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'The GLP-1 Success Blueprint™',
+  brand: { '@type': 'Brand', name: BRAND_NAME },
+  description: SITE_DESCRIPTION,
+  offers: {
+    '@type': 'Offer',
+    price: PRICE_RAW,
+    priceCurrency: CURRENCY,
+    availability: 'https://schema.org/InStock',
+    url: canonicalURL,
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonts: preload only the two above-the-fold families (02-tech-spec §3.2) -->
+    <link rel="preload" href="/fonts/dm-serif-display-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {includeProductSchema && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+    )}
+    {includeProductSchema && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    )}
+
+    <!-- Minimal Data Layer — see Docs/03-tracking.md. GTM web container is loaded
+         deferred/post-load by tracking.js; nothing here blocks rendering. -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <slot name="header" />
+    <main id="main">
+      <slot />
+    </main>
+    <script src="../scripts/tracking.js"></script>
+  </body>
+</html>

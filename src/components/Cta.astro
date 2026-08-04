@@ -1,0 +1,88 @@
+---
+import { CHECKOUT_URL, HERO_VARIANT } from '../config';
+
+export interface Props {
+  label: string;
+  position: 'header' | 'hero' | 'blueprint' | 'stack' | 'offer' | 'final';
+  variant?: 'primary' | 'secondary';
+  fullWidthMobile?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  position,
+  variant = 'primary',
+  fullWidthMobile = true,
+  class: className = '',
+} = Astro.props;
+---
+
+<a
+  href={CHECKOUT_URL}
+  class={`cta cta--${variant} ${fullWidthMobile ? 'cta--full-mobile' : ''} ${className}`}
+  data-cta
+  data-cta-position={position}
+  data-hero-variant={HERO_VARIANT}
+>
+  {label}
+</a>
+
+<style>
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 32px;
+    border-radius: var(--radius-button);
+    font-family: var(--font-functional);
+    font-weight: 650;
+    font-size: 17px;
+    line-height: 1;
+    white-space: normal;
+    text-align: center;
+    transition: background var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+  }
+
+  .cta--primary {
+    background: var(--cta-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-cta);
+  }
+
+  .cta--primary:hover {
+    background: var(--cta-hover);
+    transform: translateY(-2px);
+  }
+
+  .cta--secondary {
+    background: transparent;
+    color: var(--brand-green);
+    border: 1px solid var(--brand-green);
+  }
+
+  .cta--secondary:hover {
+    background: var(--bg-soft-green);
+  }
+
+  .cta--full-mobile {
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .cta--full-mobile {
+      width: auto;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .cta {
+      height: 52px;
+      font-size: 16px;
+      padding: 0 24px;
+    }
+  }
+</style>

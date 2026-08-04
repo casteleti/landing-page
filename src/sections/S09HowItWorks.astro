@@ -1,0 +1,88 @@
+---
+// SEÇÃO 9 — COMO USAR. Docs/01-sections-copy.md SEÇÃO 9
+const steps = [
+  { title: '1. Purchase', description: 'Complete secure checkout in under a minute.' },
+  { title: '2. Download instantly', description: 'Get every guide right away, on any device.' },
+  {
+    title: '3. Start where you are',
+    description: "Jump into the phase that matches your journey today.",
+  },
+  { title: '4. Use what you need', description: "Open the guide that answers today's question." },
+  {
+    title: '5. Check in weekly',
+    description: 'Track patterns and bring better questions to your healthcare provider.',
+  },
+];
+---
+
+<section id="how-it-works" class="section bg-white">
+  <div class="container how">
+    <h2 class="h2">How It Works</h2>
+
+    <ol class="how__list">
+      {steps.map((step, index) => (
+        <li>
+          <span class="how__number" aria-hidden="true">{index + 1}</span>
+          <div>
+            <p class="h3 how__title">{step.title.replace(/^\d+\.\s*/, '')}</p>
+            <p class="body how__description">{step.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .how__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    counter-reset: step;
+  }
+
+  @media (min-width: 900px) {
+    .how__list {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+  }
+
+  .how__list li {
+    display: flex;
+    gap: var(--space-2);
+    max-width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .how__list li {
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+    }
+  }
+
+  .how__number {
+    flex-shrink: 0;
+    font-family: var(--font-editorial);
+    font-size: 32px;
+    color: var(--brand-green);
+    line-height: 1;
+  }
+
+  .how__title {
+    margin: 0 0 4px;
+  }
+
+  .how__description {
+    margin: 0;
+    font-size: 15px;
+  }
+</style>

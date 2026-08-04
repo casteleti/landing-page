@@ -1,0 +1,201 @@
+---
+// Section 11 — product-proof preview grid with lightbox (zero dependency).
+export interface Props {
+  previews: { id: string; caption: string }[];
+}
+
+const { previews } = Astro.props;
+---
+
+<div class="preview-grid">
+  {previews.map((preview) => (
+    <button
+      type="button"
+      class="preview-grid__item"
+      data-lightbox-trigger
+      data-caption={preview.caption}
+      aria-haspopup="dialog"
+    >
+      <span class="preview-grid__placeholder">PREVIEW<br />pending asset</span>
+      <span class="preview-grid__caption">{preview.caption}</span>
+    </button>
+  ))}
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Preview" hidden>
+  <div class="lightbox__backdrop" data-lightbox-close></div>
+  <div class="lightbox__panel">
+    <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close preview">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12" /><path d="M18 6 6 18" />
+      </svg>
+    </button>
+    <div class="lightbox__image">
+      <span>PREVIEW<br />pending asset</span>
+    </div>
+    <p class="lightbox__caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
+<style>
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+
+  @media (min-width: 900px) {
+    .preview-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+  }
+
+  .preview-grid__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
+  }
+
+  .preview-grid__placeholder {
+    aspect-ratio: 4 / 5;
+    background: var(--bg-cream);
+    border-radius: var(--radius-image);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-functional);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted-aa);
+    transition: box-shadow var(--duration-fast) var(--ease-standard);
+  }
+
+  .preview-grid__item:hover .preview-grid__placeholder,
+  .preview-grid__item:focus-visible .preview-grid__placeholder {
+    box-shadow: var(--shadow-product);
+  }
+
+  .preview-grid__caption {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  .lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 37, 31, 0.65);
+  }
+
+  .lightbox__panel {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+    max-width: 480px;
+    width: calc(100% - 40px);
+    box-shadow: var(--shadow-product);
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    background: var(--bg-main);
+    border: none;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+  }
+
+  .lightbox__image {
+    aspect-ratio: 4 / 5;
+    background: var(--bg-cream);
+    border-radius: var(--radius-image);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-functional);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted-aa);
+  }
+
+  .lightbox__caption {
+    margin-top: var(--space-2);
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+    text-align: center;
+  }
+</style>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const captionEl = document.getElementById('lightbox-caption');
+  const triggers = document.querySelectorAll<HTMLButtonElement>('[data-lightbox-trigger]');
+  const closers = document.querySelectorAll<HTMLElement>('[data-lightbox-close]');
+  let lastFocused: HTMLElement | null = null;
+
+  function openLightbox(trigger: HTMLButtonElement) {
+    if (!lightbox || !captionEl) return;
+    lastFocused = trigger;
+    const caption = trigger.getAttribute('data-caption') || '';
+    captionEl.textContent = caption;
+    lightbox.hidden = false;
+    (lightbox.querySelector('.lightbox__close') as HTMLElement)?.focus();
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'preview_open', preview_id: caption });
+
+    document.addEventListener('keydown', onKeydown);
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    document.removeEventListener('keydown', onKeydown);
+    lastFocused?.focus();
+  }
+
+  function onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') closeLightbox();
+  }
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => openLightbox(trigger));
+  });
+
+  closers.forEach((el) => {
+    el.addEventListener('click', closeLightbox);
+  });
+</script>

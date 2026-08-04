@@ -1,0 +1,124 @@
+---
+// Section 1 — Header. design.md §6.8 · Docs/01-sections-copy.md SEÇÃO 1
+import Cta from './Cta.astro';
+import { BRAND_NAME } from '../config';
+---
+
+<header class="site-header" id="header">
+  <div class="container site-header__inner">
+    <a href="#hero" class="site-header__logo" aria-label={`${BRAND_NAME} — home`}>
+      {BRAND_NAME}
+    </a>
+
+    <div class="site-header__right">
+      <p class="site-header__trust">
+        Secure checkout <span aria-hidden="true">·</span> Instant digital access
+      </p>
+      <Cta
+        label="Get Instant Access"
+        position="header"
+        variant="secondary"
+        fullWidthMobile={false}
+        class="site-header__cta"
+      />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-main);
+    transition: box-shadow var(--duration-standard) var(--ease-standard);
+  }
+
+  .site-header.is-sticky {
+    box-shadow: var(--shadow-header-sticky);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  @media (min-width: 900px) {
+    .site-header__inner {
+      height: 80px;
+    }
+  }
+
+  .site-header__logo {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--brand-green);
+    max-width: 150px;
+  }
+
+  @media (min-width: 900px) {
+    .site-header__logo {
+      font-size: 24px;
+      max-width: 230px;
+    }
+  }
+
+  .site-header__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .site-header__trust {
+    display: none;
+    margin: 0;
+    font-family: var(--font-functional);
+    font-size: 13px;
+    color: var(--text-muted-aa);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 900px) {
+    .site-header__trust {
+      display: block;
+    }
+  }
+
+  :global(.site-header__cta) {
+    height: 44px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 900px) {
+    :global(.site-header__cta) {
+      height: 48px;
+      font-size: 15px;
+      padding: 0 24px;
+    }
+  }
+
+  .site-header.is-sticky :global(.site-header__cta.cta--secondary) {
+    background: var(--cta-primary);
+    color: var(--white);
+    border-color: var(--cta-primary);
+  }
+</style>
+
+<script>
+  const header = document.getElementById('header');
+  const hero = document.getElementById('hero');
+
+  if (header && hero && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        header.classList.toggle('is-sticky', !entry.isIntersecting);
+      },
+      { rootMargin: '0px', threshold: 0 }
+    );
+    observer.observe(hero);
+  }
+</script>

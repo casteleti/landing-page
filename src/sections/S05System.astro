@@ -1,0 +1,122 @@
+---
+// SEÇÃO 5 — SOLUÇÃO (4-Phase System). Docs/01-sections-copy.md SEÇÃO 5
+import PhaseCard from '../components/PhaseCard.astro';
+
+const phases = [
+  {
+    number: '1',
+    icon: 'checklist' as const,
+    title: 'PRIME',
+    tagline: 'Get ready with confidence.',
+    description:
+      'Prepare your routine, kitchen, questions, and expectations before (or right at) the start.',
+  },
+  {
+    number: '2',
+    icon: 'calendar' as const,
+    title: 'INITIATE',
+    tagline: 'Navigate your first 30 days.',
+    description:
+      'Practical support for adaptation, common side-effect questions, and eating when appetite is low.',
+  },
+  {
+    number: '3',
+    icon: 'bolt' as const,
+    title: 'OPTIMIZE',
+    tagline: 'Protect what matters.',
+    description:
+      'Prioritize protein, movement, recovery, and body composition — and understand plateaus without panic.',
+  },
+  {
+    number: '4',
+    icon: 'infinity' as const,
+    title: 'SUSTAIN',
+    tagline: 'Make it last.',
+    description:
+      'Build flexible habits for maintenance, real life, and any medically supervised transition.',
+  },
+];
+---
+
+<section id="system" class="section bg-soft-green">
+  <div class="container system">
+    <div class="system__intro">
+      <h2 class="h2" style="color: var(--brand-dark)">Meet the GLP-1 Success Blueprint™</h2>
+      <p class="body">
+        A step-by-step educational system that organizes your entire GLP-1 journey into
+        four practical phases — so you always know what to focus on next. No extreme
+        rules. No shame. No guesswork.
+      </p>
+    </div>
+
+    <div class="system__grid">
+      {phases.map((phase) => (
+        <PhaseCard
+          number={phase.number}
+          icon={phase.icon}
+          title={phase.title}
+          tagline={phase.tagline}
+          description={phase.description}
+        />
+      ))}
+    </div>
+
+    <div class="system__note">
+      <p class="body">
+        This is <strong>not</strong> another generic weight-loss ebook, a diet program, or
+        medical advice. It's a focused library of educational guides, checklists,
+        trackers, and decision tools built around the real-life questions GLP-1 users face
+        every day — always alongside your healthcare provider, never instead of it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .system {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .system__intro {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .system__intro .body {
+    color: var(--brand-dark);
+    opacity: 0.85;
+  }
+
+  .system__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 640px) {
+    .system__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .system__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .system__note {
+    background: var(--white);
+    border: 1px solid var(--border-brand);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+  }
+
+  .system__note strong {
+    font-weight: 600;
+  }
+</style>

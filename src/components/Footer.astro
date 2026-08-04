@@ -1,0 +1,83 @@
+---
+// Shared footer — used by Section 16 (index) and the legal pages (02-tech-spec §8).
+import { SUPPORT_EMAIL, BRAND_NAME, YEAR } from '../config';
+---
+
+<footer id="footer" class="bg-dark footer">
+  <div class="container footer__inner">
+    <p class="footer__links">
+      Contact: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+      <span aria-hidden="true">|</span>
+      <a href="/refund-policy">Refund Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="/privacy-policy">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="/terms">Terms of Use</a>
+    </p>
+    <p class="footer__copyright">© {YEAR} {BRAND_NAME}</p>
+
+    <div id="footer-disclaimer" class="footer__disclaimer">
+      <p>
+        This product is for educational and informational purposes only. It is not medical
+        advice and does not diagnose, treat, cure, or prevent any disease or medical
+        condition. Always consult your qualified healthcare professional regarding
+        medication, dosage, symptoms, nutrition, exercise, and any changes to your
+        treatment plan. Seek urgent medical care for severe or concerning symptoms.
+        Individual results and experiences vary. For adults only. Ozempic®, Wegovy®,
+        Mounjaro®, Zepbound® and other trademarks belong to their respective owners. This
+        product is not affiliated with, sponsored by, or endorsed by any pharmaceutical
+        manufacturer.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--space-6);
+    border-top: 1px solid rgba(143, 153, 94, 0.3);
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-functional);
+    font-size: 14px;
+    color: var(--bg-cream);
+    margin: 0;
+  }
+
+  .footer__links a {
+    text-decoration: underline;
+  }
+
+  .footer__copyright {
+    font-family: var(--font-functional);
+    font-size: 13px;
+    color: var(--bg-cream);
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .footer__disclaimer {
+    margin-top: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(143, 153, 94, 0.3);
+  }
+
+  .footer__disclaimer p {
+    font-family: var(--font-functional);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--bg-cream);
+    margin: 0;
+    max-width: 900px;
+  }
+</style>

@@ -1,0 +1,159 @@
+---
+// Section 7 — bonus library card. design.md §6.3
+import Icon from './Icon.astro';
+
+export interface Props {
+  title: string;
+  subtitle: string;
+  painLine: string;
+  bullets: string[];
+  value: number;
+  coverAlt: string;
+}
+
+const { title, subtitle, painLine, bullets, value, coverAlt } = Astro.props;
+---
+
+<article class="bonus-card">
+  <div class="bonus-card__cover" role="img" aria-label={coverAlt}>
+    <span class="bonus-card__cover-label">COVER<br />pending asset</span>
+  </div>
+
+  <div class="bonus-card__body">
+    <h4 class="bonus-card__title">{title}</h4>
+    <p class="bonus-card__subtitle">{subtitle}</p>
+    <p class="body-secondary bonus-card__pain">{painLine}</p>
+
+    <ul class="bonus-card__bullets">
+      {bullets.map((bullet) => (
+        <li>
+          <Icon name="check" size={15} class="bonus-card__bullet-icon" />
+          <span>{bullet}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="bonus-card__value-row">
+      <span class="bonus-card__value">(${value} reference value)</span>
+      <span class="badge">INCLUDED FREE TODAY</span>
+    </div>
+  </div>
+</article>
+
+<style>
+  .bonus-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .bonus-card {
+      flex-direction: row;
+    }
+  }
+
+  .bonus-card__cover {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 160px;
+    aspect-ratio: 4 / 5;
+    background: var(--bg-cream);
+    border-radius: var(--radius-image);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .bonus-card__cover-label {
+    font-family: var(--font-functional);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted-aa);
+  }
+
+  .bonus-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    flex: 1;
+  }
+
+  .bonus-card__title {
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .bonus-card__subtitle {
+    font-family: var(--font-functional);
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .bonus-card__pain {
+    margin: 4px 0 0;
+    font-style: normal;
+  }
+
+  .bonus-card__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: var(--space-1);
+  }
+
+  .bonus-card__bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  :global(.bonus-card__bullet-icon) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .bonus-card__value-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .bonus-card__value {
+    font-size: 13px;
+    color: var(--text-muted-aa);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-soft-green);
+    color: var(--brand-dark);
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius-badge);
+    padding: 7px 12px;
+  }
+</style>

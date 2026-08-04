@@ -1,0 +1,58 @@
+---
+// SEÇÃO 12 — SOBRE O CRIADOR. Docs/01-sections-copy.md SEÇÃO 12
+import { CREATOR_BIO } from '../config';
+---
+
+<section id="creator" class="section bg-light">
+  <div class="container creator">
+    <div class="creator__photo">
+      <img
+        src="/images/creator-photo-placeholder.svg"
+        width="480"
+        height="576"
+        alt="Placeholder for a real photo of the creator — pending asset"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="creator__content">
+      <h2 class="h2">Why I Built This</h2>
+      <p class="body">{CREATOR_BIO}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .creator {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .creator {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .creator__photo,
+    .creator__content {
+      flex: 1;
+    }
+  }
+
+  .creator__photo img {
+    border-radius: var(--radius-image);
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .creator__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+</style>

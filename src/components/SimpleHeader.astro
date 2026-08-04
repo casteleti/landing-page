@@ -1,0 +1,41 @@
+---
+// Reduced header for legal pages (02-tech-spec §8): logo only, no sticky CTA.
+import { BRAND_NAME } from '../config';
+---
+
+<header class="simple-header">
+  <div class="container simple-header__inner">
+    <a href="/" class="simple-header__logo" aria-label={`${BRAND_NAME} — home`}>
+      {BRAND_NAME}
+    </a>
+    <a href="/#hero" class="simple-header__back">Back to the guide</a>
+  </div>
+</header>
+
+<style>
+  .simple-header {
+    background: var(--bg-main);
+  }
+
+  .simple-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .simple-header__logo {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--brand-green);
+  }
+
+  .simple-header__back {
+    font-family: var(--font-functional);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-green);
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+// SEÇÃO 15 — FAQ. Docs/01-sections-copy.md SEÇÃO 15
+import Faq from '../components/Faq.astro';
+import { FAQ_ITEMS } from '../content/faq-data';
+---
+
+<section id="faq" class="section bg-white">
+  <div class="container faq-section">
+    <h2 class="h2">Frequently Asked Questions</h2>
+    <Faq items={[...FAQ_ITEMS]} />
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: 900px;
+    margin-inline: auto;
+  }
+</style>

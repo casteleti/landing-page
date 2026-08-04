@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import SimpleHeader from '../components/SimpleHeader.astro';
+import Footer from '../components/Footer.astro';
+import { BRAND_NAME } from '../config';
+---
+
+<Base title={`Terms of Use — ${BRAND_NAME}`} includeProductSchema={false}>
+  <SimpleHeader slot="header" />
+  <section class="section bg-white">
+    <div class="container reading-column legal">
+      <h1 class="h2">Terms of Use</h1>
+      <p class="body legal__pending">
+        [LEGAL COPY PENDING — do not launch. Replace this page with the client's real terms
+        of use — covering the personal-use license for the PDF guides (Docs/01-sections-copy.md
+        SEÇÃO 6 file details), acceptable use, disclaimer of medical advice, limitation of
+        liability, and governing law for US/CA/UK buyers — before this page goes live.]
+      </p>
+    </div>
+  </section>
+  <Footer />
+</Base>

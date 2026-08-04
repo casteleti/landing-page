@@ -1,0 +1,41 @@
+---
+// SEÇÃO 14 — GARANTIA. Docs/01-sections-copy.md SEÇÃO 14
+import Icon from '../components/Icon.astro';
+import { SUPPORT_EMAIL, GUARANTEE_DAYS } from '../config';
+---
+
+<section id="guarantee" class="section bg-soft-green">
+  <div class="container reading-column guarantee">
+    <Icon name="shield" size={36} class="guarantee__icon" />
+    <h2 class="h2" style="color: var(--brand-dark)">Try It for {GUARANTEE_DAYS} Days — Risk-Free*</h2>
+    <p class="body">
+      Download everything, explore the Blueprint, and put the tools to work. If it isn't a
+      fit for you within {GUARANTEE_DAYS} days, email us at{' '}
+      <a href={`mailto:${SUPPORT_EMAIL}`} class="guarantee__email">{SUPPORT_EMAIL}</a> and
+      we'll refund your purchase. Simple as that.
+    </p>
+    <p class="disclaimer">
+      *See our <a href="/refund-policy" class="guarantee__link">full refund policy</a> for details.
+    </p>
+  </div>
+</section>
+
+<style>
+  .guarantee {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  :global(.guarantee__icon) {
+    color: var(--brand-green);
+    margin-bottom: 4px;
+  }
+
+  .guarantee__email,
+  .guarantee__link {
+    text-decoration: underline;
+    color: var(--brand-green);
+    font-weight: 600;
+  }
+</style>

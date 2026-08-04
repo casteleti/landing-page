@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import SimpleHeader from '../components/SimpleHeader.astro';
+import Footer from '../components/Footer.astro';
+import { BRAND_NAME } from '../config';
+---
+
+<Base title={`Privacy Policy — ${BRAND_NAME}`} includeProductSchema={false}>
+  <SimpleHeader slot="header" />
+  <section class="section bg-white">
+    <div class="container reading-column legal">
+      <h1 class="h2">Privacy Policy</h1>
+      <p class="body legal__pending">
+        [LEGAL COPY PENDING — do not launch. Replace this page with the client's real
+        privacy policy — covering what data is collected via analytics/tracking (see
+        Docs/03-tracking.md), how it is used, third-party processors (checkout provider,
+        server-side GTM), consumer rights under CCPA/CPRA (US), PIPEDA/CPPA (Canada), and
+        GDPR (UK), and contact details for data requests — before this page goes live.]
+      </p>
+    </div>
+  </section>
+  <Footer />
+</Base>

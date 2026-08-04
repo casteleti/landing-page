@@ -1,0 +1,102 @@
+---
+// Section 15 — FAQ accordion. Native <details>/<summary>, zero extra JS library.
+import Icon from './Icon.astro';
+
+export interface Props {
+  items: { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq" id="faq-accordion">
+  {items.map((item, index) => (
+    <details class="faq__item" data-faq-index={index + 1}>
+      <summary class="faq__question">
+        <span>{item.question}</span>
+        <Icon name="plus" size={18} class="faq__icon" />
+      </summary>
+      <div class="faq__answer">
+        <p class="body">{item.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq {
+    max-width: 900px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--border-light);
+    padding-block: var(--space-2);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-primary);
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  :global(.faq__icon) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .faq__item[open] :global(.faq__icon) {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    overflow: hidden;
+    padding-top: var(--space-2);
+  }
+
+  .faq__answer p {
+    max-width: none;
+  }
+
+  @media (min-width: 900px) {
+    .faq__question {
+      font-size: 17px;
+    }
+  }
+</style>
+
+<script>
+  const details = document.querySelectorAll<HTMLDetailsElement>('#faq-accordion details');
+
+  details.forEach((el) => {
+    el.addEventListener('toggle', () => {
+      if (el.open) {
+        details.forEach((other) => {
+          if (other !== el) other.open = false;
+        });
+
+        const index = el.getAttribute('data-faq-index');
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'faq_open',
+          question_index: index ? Number(index) : undefined,
+        });
+      }
+    });
+  });
+</script>

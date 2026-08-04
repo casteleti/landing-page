@@ -1,0 +1,182 @@
+---
+// SEÇÃO 2 — HERO. Docs/01-sections-copy.md SEÇÃO 2 · design.md §3.6/§7.4-7.5
+import Cta from '../components/Cta.astro';
+import Icon from '../components/Icon.astro';
+import { PRICE, HERO_VARIANT, HERO_HEADLINES } from '../config';
+
+const headline = HERO_HEADLINES[HERO_VARIANT];
+// Only the default variant (a) carries the approved inline highlight (design.md §4.4:
+// at most one marked phrase per headline). Variants b/c render as plain text.
+const highlightPhrase = 'Practical GLP-1 Roadmap';
+const [before, after] =
+  HERO_VARIANT === 'a' && headline.includes(highlightPhrase)
+    ? headline.split(highlightPhrase)
+    : [headline, null];
+---
+
+<section id="hero" class="hero section bg-main">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow">
+        For adults using prescribed GLP-1 medications (semaglutide, tirzepatide, and similar)
+      </p>
+
+      <h1 class="h1 hero__headline">
+        {after !== null ? (
+          <>
+            {before}<mark>{highlightPhrase}</mark>{after}
+          </>
+        ) : (
+          headline
+        )}
+      </h1>
+
+      <p class="subheadline hero__subheadline">
+        A clear 4-phase system — plus 10 practical digital guides — designed to help you
+        navigate low appetite, protein, everyday challenges, plateaus, and long-term
+        maintenance.
+      </p>
+
+      <div class="hero__mockup hero__mockup--mobile">
+        <img
+          src="/images/hero-mockup.svg"
+          width="480"
+          height="600"
+          alt="Preview of The GLP-1 Success Blueprint cover and two bonus guide covers"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <Cta label={`Get Instant Access — ${PRICE}`} position="hero" class="hero__cta" />
+
+      <p class="hero__microcopy">
+        <span>One-time payment — no subscription</span>
+        <span aria-hidden="true">·</span>
+        <span>Instant digital download</span>
+        <span aria-hidden="true">·</span>
+        <span>Secure checkout</span>
+      </p>
+
+      <p class="hero__badge">
+        <Icon name="graduation-cap" size={16} />
+        <span>Educational tools for GLP-1 users. Not medical advice.</span>
+      </p>
+    </div>
+
+    <div class="hero__mockup hero__mockup--desktop">
+      <img
+        src="/images/hero-mockup.svg"
+        width="480"
+        height="600"
+        alt="Preview of The GLP-1 Success Blueprint cover and two bonus guide covers"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(180deg, #F7F5EF 0%, #FFFFFF 100%);
+    padding-top: var(--space-6);
+  }
+
+  .hero__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .hero__content {
+      flex: 0 0 55%;
+    }
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .hero__eyebrow {
+    max-width: 46ch;
+  }
+
+  .hero__headline {
+    margin-top: 4px;
+  }
+
+  .hero__mockup img {
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .hero__mockup--mobile {
+    margin-block: var(--space-2);
+  }
+
+  .hero__mockup--desktop {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .hero__mockup--mobile {
+      display: none;
+    }
+
+    .hero__mockup--desktop {
+      display: block;
+      flex: 0 0 45%;
+    }
+
+    .hero__mockup--desktop img {
+      max-width: 100%;
+    }
+  }
+
+  :global(.hero__cta) {
+    margin-top: var(--space-2);
+  }
+
+  .hero__microcopy {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    font-family: var(--font-functional);
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    margin-top: var(--space-1);
+    padding: 8px 14px;
+    background: var(--bg-soft-green);
+    color: var(--brand-dark);
+    border-radius: var(--radius-badge);
+    font-family: var(--font-functional);
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+
+  .hero__badge :global(svg) {
+    flex-shrink: 0;
+    color: var(--brand-green);
+  }
+</style>

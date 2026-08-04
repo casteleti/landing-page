@@ -1,0 +1,68 @@
+---
+// SEÇÃO 7 — BIBLIOTECA DE BÔNUS. Docs/01-sections-copy.md SEÇÃO 7
+import BonusCard from '../components/BonusCard.astro';
+import { BONUS_GROUPS } from '../content/bonus-data';
+---
+
+<section id="bonuses" class="section bg-main">
+  <div class="container bonuses">
+    <div class="bonuses__intro">
+      <h2 class="h2">Plus 10 Premium Guides — Included Free Today</h2>
+      <p class="body">
+        Every guide answers a question GLP-1 users are already searching for. Use the one
+        you need, the day you need it.
+      </p>
+    </div>
+
+    {BONUS_GROUPS.map((group) => (
+      <div class="bonuses__group">
+        <h3 class="h3-group">{group.heading}</h3>
+        <div class="bonuses__grid">
+          {group.items.map((item) => (
+            <BonusCard
+              title={item.title}
+              subtitle={item.subtitle}
+              painLine={item.painLine}
+              bullets={item.bullets}
+              value={item.value}
+              coverAlt={`Cover of ${item.title}`}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bonuses {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .bonuses__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 720px;
+  }
+
+  .bonuses__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .bonuses__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 900px) {
+    .bonuses__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

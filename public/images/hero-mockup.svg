@@ -1,0 +1,73 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder mockup of the GLP-1 Success Blueprint guide and bonus guides">
+  <defs>
+    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#26301c" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <!-- back card (bonus guide, partially visible) -->
+  <g transform="rotate(-9 250 470)">
+    <rect x="120" y="230" width="380" height="480" rx="16" fill="#E1DBCE"/>
+    <rect x="120" y="230" width="380" height="70" rx="16" fill="#8F995E"/>
+  </g>
+
+  <!-- middle card (bonus guide, partially visible) -->
+  <g transform="rotate(7 560 470)">
+    <rect x="360" y="250" width="360" height="460" rx="16" fill="#FCFBF8" stroke="#E5E1D8" stroke-width="2"/>
+    <rect x="360" y="250" width="360" height="64" rx="16" fill="#7C8B33"/>
+  </g>
+
+  <!-- main cover (front) -->
+  <g filter="url(#soft-shadow)">
+    <rect x="170" y="120" width="460" height="600" rx="20" fill="#FCFBF8" stroke="#E5E1D8" stroke-width="2"/>
+
+    <!-- top brand bar -->
+    <rect x="170" y="120" width="460" height="150" rx="20" fill="#344426"/>
+    <rect x="170" y="220" width="460" height="50" fill="#344426"/>
+
+    <text x="400" y="175" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="19" fill="#F7F5EF" letter-spacing="2">THE</text>
+    <text x="400" y="215" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#FFFFFF" font-weight="600">GLP-1 Success</text>
+    <text x="400" y="253" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#FFFFFF" font-weight="600">Blueprint&#8482;</text>
+
+    <!-- phase chips -->
+    <g font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#344426">
+      <rect x="200" y="300" width="92" height="30" rx="15" fill="#EEF1E7"/>
+      <text x="246" y="320" text-anchor="middle">PRIME</text>
+
+      <rect x="302" y="300" width="104" height="30" rx="15" fill="#EEF1E7"/>
+      <text x="354" y="320" text-anchor="middle">INITIATE</text>
+
+      <rect x="416" y="300" width="112" height="30" rx="15" fill="#EEF1E7"/>
+      <text x="472" y="320" text-anchor="middle">OPTIMIZE</text>
+
+      <rect x="538" y="300" width="102" height="30" rx="15" fill="#EEF1E7"/>
+      <text x="589" y="320" text-anchor="middle">SUSTAIN</text>
+    </g>
+
+    <!-- simulated body content lines (placeholder interior page) -->
+    <g fill="#D8D5CC">
+      <rect x="210" y="370" width="380" height="14" rx="7"/>
+      <rect x="210" y="398" width="340" height="14" rx="7"/>
+      <rect x="210" y="426" width="360" height="14" rx="7"/>
+      <rect x="210" y="454" width="300" height="14" rx="7"/>
+    </g>
+
+    <!-- checklist preview block -->
+    <g>
+      <rect x="210" y="500" width="380" height="180" rx="14" fill="#F7F5EF" stroke="#E5E1D8" stroke-width="2"/>
+      <circle cx="238" cy="530" r="8" fill="none" stroke="#4C6235" stroke-width="2.5"/>
+      <path d="M234 530l3 4 7-8" stroke="#4C6235" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="258" y="524" width="260" height="12" rx="6" fill="#C9C5B8"/>
+
+      <circle cx="238" cy="568" r="8" fill="none" stroke="#4C6235" stroke-width="2.5"/>
+      <path d="M234 568l3 4 7-8" stroke="#4C6235" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="258" y="562" width="230" height="12" rx="6" fill="#C9C5B8"/>
+
+      <circle cx="238" cy="606" r="8" fill="none" stroke="#8F995E" stroke-width="2.5"/>
+      <rect x="258" y="600" width="280" height="12" rx="6" fill="#D8D5CC"/>
+
+      <circle cx="238" cy="644" r="8" fill="none" stroke="#8F995E" stroke-width="2.5"/>
+      <rect x="258" y="638" width="200" height="12" rx="6" fill="#D8D5CC"/>
+    </g>
+  </g>
+</svg>

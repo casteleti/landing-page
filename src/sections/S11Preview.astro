@@ -1,0 +1,45 @@
+---
+// SEÇÃO 11 — PROVA DE PRODUTO. Docs/01-sections-copy.md SEÇÃO 11
+// ⚠️ Only real PDF preview pages may replace these placeholders — never invented content.
+import Lightbox from '../components/Lightbox.astro';
+
+const previews = [
+  { id: 'priority-plate', caption: 'The Priority Plate™' },
+  { id: 'symptom-matrix', caption: 'Symptom → Action Matrix' },
+  { id: '30-day-calendar', caption: '30-Day Calendar' },
+  { id: 'decision-tree-nausea', caption: 'Decision Tree: Nausea' },
+  { id: 'recipe-page', caption: 'Recipe page' },
+  { id: 'weekly-review', caption: 'Weekly Review' },
+];
+---
+
+<section id="preview" class="section bg-white">
+  <div class="container preview">
+    <div class="preview__intro">
+      <h2 class="h2">See Exactly What's Behind the Button</h2>
+      <p class="body">
+        No mystery boxes. Browse real preview pages from the Blueprint and bonus guides —
+        the layouts, the checklists, the decision trees, the recipe pages — before you buy.
+      </p>
+    </div>
+
+    <Lightbox previews={previews} />
+
+    <!-- SOCIAL PROOF SLOT: adicionar somente com depoimentos reais + disclosure. Specs: 20–45 palavras, nome + contexto, foto real. -->
+  </div>
+</section>
+
+<style>
+  .preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .preview__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 720px;
+  }
+</style>

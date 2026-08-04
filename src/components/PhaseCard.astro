@@ -1,0 +1,138 @@
+---
+// Used in Section 5 (mechanism, icon variant) and Section 6 (product contents, preview variant)
+import Icon from './Icon.astro';
+
+export interface Props {
+  number: string; // "1".."4"
+  title: string; // PRIME / INITIATE / OPTIMIZE / SUSTAIN
+  tagline: string;
+  description: string;
+  variant?: 'icon' | 'preview';
+  icon?: 'checklist' | 'calendar' | 'bolt' | 'infinity';
+  previewAlt?: string;
+}
+
+const {
+  number,
+  title,
+  tagline,
+  description,
+  variant = 'icon',
+  icon = 'checklist',
+  previewAlt = '',
+} = Astro.props;
+---
+
+<div class={`phase-card phase-card--${variant}`}>
+  {variant === 'preview' && (
+    <div class="phase-card__preview" role="img" aria-label={previewAlt || `${title} preview page — pending asset`}>
+      <span class="phase-card__preview-label">PREVIEW<br />pending asset</span>
+    </div>
+  )}
+
+  <div class="phase-card__body">
+    <div class="phase-card__top">
+      <span class="phase-card__number" aria-hidden="true">{number}</span>
+      {variant === 'icon' && (
+        <span class="phase-card__icon">
+          <Icon name={icon} size={22} />
+        </span>
+      )}
+    </div>
+    <p class="phase-card__title">{title}</p>
+    <p class="phase-card__tagline">{tagline}</p>
+    <p class="body phase-card__description">{description}</p>
+  </div>
+</div>
+
+<style>
+  .phase-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    height: 100%;
+  }
+
+  .phase-card--preview {
+    flex-direction: column;
+  }
+
+  @media (min-width: 640px) {
+    .phase-card--preview {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  .phase-card__preview {
+    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: var(--bg-cream);
+    border-radius: var(--radius-image);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .phase-card__preview {
+      width: 140px;
+    }
+  }
+
+  .phase-card__preview-label {
+    font-family: var(--font-functional);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted-aa);
+  }
+
+  .phase-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .phase-card__number {
+    font-family: var(--font-editorial);
+    font-size: 34px;
+    color: var(--brand-sage);
+    line-height: 1;
+  }
+
+  .phase-card__icon {
+    color: var(--brand-green);
+    display: inline-flex;
+  }
+
+  .phase-card__title {
+    font-family: var(--font-functional);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--brand-dark);
+    margin: 0;
+  }
+
+  .phase-card__tagline {
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .phase-card__description {
+    font-size: 15px;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,7 @@
+<svg width="600" height="720" viewBox="0 0 600 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder for a real photo of the creator — pending asset">
+  <rect width="600" height="720" rx="20" fill="#E1DBCE"/>
+  <circle cx="300" cy="290" r="90" fill="#C9C5B8"/>
+  <path d="M150 560c0-95 67-150 150-150s150 55 150 150" fill="#C9C5B8"/>
+  <text x="300" y="650" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1" fill="#7A7D76">PHOTO</text>
+  <text x="300" y="674" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" letter-spacing="1" fill="#7A7D76">pending asset — replace with real photo</text>
+</svg>

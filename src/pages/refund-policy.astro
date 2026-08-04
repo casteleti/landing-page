@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import SimpleHeader from '../components/SimpleHeader.astro';
+import Footer from '../components/Footer.astro';
+import { BRAND_NAME, GUARANTEE_DAYS } from '../config';
+---
+
+<Base title={`Refund Policy — ${BRAND_NAME}`} includeProductSchema={false}>
+  <SimpleHeader slot="header" />
+  <section class="section bg-white">
+    <div class="container reading-column legal">
+      <h1 class="h2">Refund Policy</h1>
+      <p class="body legal__pending">
+        [LEGAL COPY PENDING — do not launch. Replace this page with the client's real
+        refund policy. Must confirm the {GUARANTEE_DAYS}-day guarantee window
+        (Docs/01-sections-copy.md SEÇÃO 14) with the checkout platform and align it with
+        UK consumer rights for digital content (Consumer Rights Act 2015 / Digital Markets,
+        Competition and Consumers Act) before this page or the guarantee copy on the main
+        page goes live — this is a launch-blocking item per Docs/04-qa-launch-checklist.md
+        §B.]
+      </p>
+    </div>
+  </section>
+  <Footer />
+</Base>

@@ -1,0 +1,103 @@
+---
+// SEÇÃO 10 — PARA QUEM É / NÃO É. Docs/01-sections-copy.md SEÇÃO 10
+import Icon from '../components/Icon.astro';
+
+const forYou = [
+  'Are starting — or currently using — a prescribed GLP-1 medication',
+  'Want practical nutrition, routine, and habit support without extreme diet rules',
+  'Are concerned about low appetite, protein, strength, plateaus, or maintenance',
+  'Prefer organized, judgment-free education over scattered social media advice',
+  'Want to feel more prepared for real-life situations: meals, travel, events, busy weeks',
+];
+
+const notForYou = [
+  'Are looking for medical diagnosis, personalized dosing, or prescription advice',
+  'Expect guaranteed weight loss or guaranteed results of any kind',
+  'Want a replacement for your doctor, dietitian, or pharmacist',
+  'Are seeking a crash diet or rapid-transformation promise',
+];
+---
+
+<section id="who-its-for" class="section bg-main">
+  <div class="container who">
+    <div class="who__card who__card--yes">
+      <h3 class="h3">This is for you if you:</h3>
+      <ul>
+        {forYou.map((line) => (
+          <li>
+            <Icon name="check" size={16} />
+            <span class="body">{line}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="who__card who__card--no">
+      <h3 class="h3">This may not be for you if you:</h3>
+      <ul>
+        {notForYou.map((line) => (
+          <li>
+            <Icon name="dash" size={16} />
+            <span class="body">{line}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .who {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 768px) {
+    .who {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+  }
+
+  .who__card {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .who__card--yes {
+    border: 2px solid var(--border-brand);
+  }
+
+  .who__card--no {
+    border: 1px solid var(--border-light);
+  }
+
+  .who__card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .who__card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .who__card--yes :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .who__card--no :global(svg) {
+    color: var(--text-muted-aa);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+</style>
