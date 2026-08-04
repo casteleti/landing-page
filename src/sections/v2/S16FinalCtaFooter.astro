@@ -1,0 +1,83 @@
+---
+// v2 SEÇÃO 16 — CTA FINAL + FOOTER. Copy: src/content/copy-v2.ts
+import Cta from '../../components/Cta.astro';
+import Footer from '../../components/Footer.astro';
+import { PRICE } from '../../config';
+import { FINAL_V2 } from '../../content/copy-v2';
+---
+
+<section id="final-cta" class="section bg-dark final-cta">
+  <img
+    class="final-cta__bg"
+    src="/images/final-cta-bg.webp"
+    width="1600"
+    height="900"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="container reading-column final-cta__inner">
+    <h2 class="h2" style="color: #F7F5EF">{FINAL_V2.heading}</h2>
+    <p class="body final-cta__copy">{FINAL_V2.copy}</p>
+    <Cta label={`Get Instant Access — ${PRICE}`} position="final" />
+    <p class="final-cta__microcopy">
+      Instant access <span aria-hidden="true">·</span> One-time payment <span aria-hidden="true">·</span> Secure checkout <span aria-hidden="true">·</span> 7-day guarantee
+    </p>
+  </div>
+</section>
+
+<Footer />
+
+<style>
+  .final-cta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .final-cta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 30%;
+    z-index: -2;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        95deg,
+        rgba(52, 68, 38, 0.97) 0%,
+        rgba(52, 68, 38, 0.93) 42%,
+        rgba(52, 68, 38, 0.55) 72%,
+        rgba(52, 68, 38, 0.42) 100%
+      ),
+      linear-gradient(180deg, rgba(52, 68, 38, 0.35) 0%, rgba(52, 68, 38, 0.35) 100%);
+  }
+
+  .final-cta__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .final-cta__copy {
+    color: var(--bg-cream);
+  }
+
+  .final-cta__microcopy {
+    font-family: var(--font-functional);
+    font-size: 13px;
+    color: var(--bg-cream);
+    opacity: 0.9;
+  }
+</style>

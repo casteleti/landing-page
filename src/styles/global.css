@@ -210,10 +210,14 @@ figure {
 .h1 {
   font-family: var(--font-editorial);
   font-weight: 400;
-  font-size: 40px;
-  line-height: 1.08;
+  /* Mobile is ~90% of traffic: the headline scales with the viewport instead of
+     sitting at one fixed size, so it never runs to 8 lines on a 360px screen. */
+  font-size: clamp(30px, 8.4vw, 42px);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
-  max-width: 14ch;
+  max-width: 18ch;
+  text-wrap: balance;
 }
 
 .h1 mark {
@@ -234,9 +238,11 @@ figure {
 .h2 {
   font-family: var(--font-editorial);
   font-weight: 400;
-  font-size: 32px;
-  line-height: 1.1;
+  font-size: clamp(27px, 6.4vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
   color: var(--text-primary);
+  text-wrap: balance;
 }
 
 .h3 {
@@ -249,11 +255,12 @@ figure {
 
 .h3-group {
   font-family: var(--font-functional);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--brand-olive);
+  /* brand-olive measures 3.75:1 on white — under AA for text this small */
+  color: var(--brand-green);
 }
 
 .body {
@@ -300,6 +307,41 @@ figure {
   }
   .body-secondary {
     font-size: 16px;
+  }
+}
+
+/* =========================================================
+   Mobile comfort (≈90% of expected traffic)
+   ========================================================= */
+@media (max-width: 639px) {
+  body {
+    font-size: 17px; /* iOS never zoom-adjusts at 17px+ */
+  }
+
+  .body {
+    font-size: 16.5px;
+    line-height: 1.62;
+  }
+
+  .section {
+    padding-block: var(--space-6); /* 48px — less dead scroll between blocks */
+  }
+
+  .section--wide {
+    padding-block: var(--space-8);
+  }
+
+  /* Nothing interactive smaller than the 44px iOS touch target */
+  a[href],
+  button {
+    min-height: 24px;
+  }
+}
+
+/* Leaves room for the sticky mobile CTA bar so it never covers the footer */
+@media (max-width: 899px) {
+  body.has-sticky-cta {
+    padding-bottom: 84px;
   }
 }
 

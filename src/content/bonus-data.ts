@@ -5,6 +5,8 @@ export interface BonusItem {
   painLine: string;
   bullets: string[];
   value: number;
+  /** Optimized WebP under public/images/covers (built by scripts/build-images.mjs) */
+  cover: string;
 }
 
 export interface BonusGroup {
@@ -27,6 +29,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'Injection-Day Playbook and a 24-Hour Side Effect Reset',
         ],
         value: 37,
+        cover: '/images/covers/side-effect-survival.webp',
       },
       {
         title: 'First 30 Days Survival Guide™',
@@ -39,6 +42,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'The 10 most common first-month mistakes — and how to sidestep them',
         ],
         value: 37,
+        cover: '/images/covers/first-30-days.webp',
       },
     ],
   },
@@ -56,6 +60,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'A "Protein Rescue Plan" for the hardest days',
         ],
         value: 27,
+        cover: '/images/covers/protein-priority.webp',
       },
       {
         title: 'Muscle Preservation Blueprint™',
@@ -68,6 +73,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'Strength & mobility tracker + body composition check-ins',
         ],
         value: 37,
+        cover: '/images/covers/muscle-preservation.webp',
       },
       {
         title: 'Face & Body Defense Guide™',
@@ -81,6 +87,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'Wardrobe transition and body-confidence guide',
         ],
         value: 27,
+        cover: '/images/covers/face-body-defense.webp',
       },
     ],
   },
@@ -98,6 +105,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'Questions to bring your prescriber before changing anything',
         ],
         value: 27,
+        cover: '/images/covers/plateau-breaker.webp',
       },
       {
         title: 'Life After GLP-1™',
@@ -110,6 +118,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'A guilt-free restart plan for imperfect weeks',
         ],
         value: 37,
+        cover: '/images/covers/life-after-glp1.webp',
       },
       {
         title: 'Food Noise Workbook™',
@@ -122,6 +131,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'A restart-without-shame plan',
         ],
         value: 27,
+        cover: '/images/covers/food-noise-workbook.webp',
       },
     ],
   },
@@ -139,6 +149,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'US and metric measurements + batch-cooking and grocery lists',
         ],
         value: 47,
+        cover: '/images/covers/high-protein-recipes.webp',
       },
       {
         title: 'Restaurant & Social Survival Guide™',
@@ -151,6 +162,7 @@ export const BONUS_GROUPS: BonusGroup[] = [
           'A no-guilt reset guide for "I ate more than planned" days',
         ],
         value: 27,
+        cover: '/images/covers/restaurant-social.webp',
       },
     ],
   },

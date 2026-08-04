@@ -1,0 +1,118 @@
+---
+// v2 SEÇÃO 5 — SOLUÇÃO. Copy: src/content/copy-v2.ts
+// Phase names and descriptions are the v1 product, untouched. Only the taglines
+// and the framing paragraphs move the emphasis to the transition.
+import PhaseCard from '../../components/PhaseCard.astro';
+import { SYSTEM_V2 } from '../../content/copy-v2';
+
+const phases = [
+  {
+    number: '1',
+    icon: 'checklist' as const,
+    title: 'PRIME',
+    tagline: SYSTEM_V2.taglines.PRIME,
+    description:
+      'Prepare your routine, kitchen, questions, and expectations before (or right at) the start.',
+  },
+  {
+    number: '2',
+    icon: 'calendar' as const,
+    title: 'INITIATE',
+    tagline: SYSTEM_V2.taglines.INITIATE,
+    description:
+      'Practical support for adaptation, common side-effect questions, and eating when appetite is low.',
+  },
+  {
+    number: '3',
+    icon: 'bolt' as const,
+    title: 'OPTIMIZE',
+    tagline: SYSTEM_V2.taglines.OPTIMIZE,
+    description:
+      'Prioritize protein, movement, recovery, and body composition — and understand plateaus without panic.',
+  },
+  {
+    number: '4',
+    icon: 'infinity' as const,
+    title: 'SUSTAIN',
+    tagline: SYSTEM_V2.taglines.SUSTAIN,
+    description:
+      'Build flexible habits for maintenance, real life, and any medically supervised transition.',
+  },
+];
+---
+
+<section id="system" class="section bg-soft-green">
+  <div class="container system">
+    <div class="system__intro">
+      <h2 class="h2" style="color: var(--brand-dark)">{SYSTEM_V2.heading}</h2>
+      <p class="body">{SYSTEM_V2.intro}</p>
+    </div>
+
+    <div class="system__grid">
+      {phases.map((phase) => (
+        <PhaseCard
+          number={phase.number}
+          icon={phase.icon}
+          title={phase.title}
+          tagline={phase.tagline}
+          description={phase.description}
+        />
+      ))}
+    </div>
+
+    <div class="system__note">
+      <p class="body">
+        {SYSTEM_V2.note.lead} <strong>{SYSTEM_V2.note.strong}</strong>{SYSTEM_V2.note.rest}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .system {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .system__intro {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .system__intro .body {
+    color: var(--brand-dark);
+    opacity: 0.85;
+  }
+
+  .system__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 640px) {
+    .system__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .system__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .system__note {
+    background: var(--white);
+    border: 1px solid var(--border-brand);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+  }
+
+  .system__note strong {
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+// v2 SEÇÃO 4 — PROBLEMA. Copy: src/content/copy-v2.ts
+// Bullets lead with the three priority-1 triggers from the research
+// (coverage/cost loss, returning hunger, the last pen) so paid traffic lands on
+// the same sentence the ad promised.
+import { PROBLEM_V2 } from '../../content/copy-v2';
+---
+
+<section id="problem" class="section bg-white">
+  <div class="container problem__grid">
+    <div class="problem">
+      <h2 class="h2">{PROBLEM_V2.heading}</h2>
+
+      <ul class="problem__list">
+        {PROBLEM_V2.bullets.map((bullet) => (
+          <li>
+            <span class="problem__dot" aria-hidden="true"></span>
+            <span class="body">{bullet}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="body problem__closing">
+        {PROBLEM_V2.closing} <strong>{PROBLEM_V2.closingStrong}</strong>
+      </p>
+    </div>
+
+    <figure class="problem__figure">
+      <img
+        src="/images/problem-companion.webp"
+        width="560"
+        height="630"
+        alt="Woman sitting on the edge of her bed, looking at a bathroom scale with a thoughtful expression"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .problem__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 900px) {
+    .problem__grid {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .problem {
+      flex: 0 0 58%;
+    }
+
+    .problem__figure {
+      flex: 1;
+    }
+  }
+
+  .problem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 68ch;
+  }
+
+  .problem__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .problem__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .problem__dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: var(--brand-sage);
+  }
+
+  .problem__closing strong {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .problem__figure {
+    position: relative;
+    max-width: 420px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .problem__figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-card);
+  }
+
+  .problem__figure::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-image);
+    background: linear-gradient(160deg, rgba(247, 245, 239, 0.28) 0%, rgba(52, 68, 38, 0.12) 100%);
+    pointer-events: none;
+  }
+</style>

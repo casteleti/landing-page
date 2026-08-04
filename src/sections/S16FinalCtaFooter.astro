@@ -6,6 +6,16 @@ import { PRICE } from '../config';
 ---
 
 <section id="final-cta" class="section bg-dark final-cta">
+  <img
+    class="final-cta__bg"
+    src="/images/final-cta-bg.webp"
+    width="1600"
+    height="900"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
   <div class="container reading-column final-cta__inner">
     <h2 class="h2" style="color: #F7F5EF">
       Feel More Prepared for the Real-Life Side of Your GLP-1 Journey
@@ -25,7 +35,42 @@ import { PRICE } from '../config';
 <Footer />
 
 <style>
+  .final-cta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .final-cta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 30%;
+    z-index: -2;
+  }
+
+  /* Reads as a photo on the right, solid brand green under the copy on the left,
+     so cream text stays at AA no matter how the band crops. */
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        95deg,
+        rgba(52, 68, 38, 0.97) 0%,
+        rgba(52, 68, 38, 0.93) 42%,
+        rgba(52, 68, 38, 0.55) 72%,
+        rgba(52, 68, 38, 0.42) 100%
+      ),
+      linear-gradient(180deg, rgba(52, 68, 38, 0.35) 0%, rgba(52, 68, 38, 0.35) 100%);
+  }
+
   .final-cta__inner {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

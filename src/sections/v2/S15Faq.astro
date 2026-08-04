@@ -1,0 +1,25 @@
+---
+// v2 SEÇÃO 15 — FAQ. The shared list is reused verbatim; v2 leads with three
+// extra entries answering the objections the research flags as the most common
+// reasons people don't buy (see copy-v2.ts FAQ_V2_EXTRA).
+import Faq from '../../components/Faq.astro';
+import { FAQ_ITEMS } from '../../content/faq-data';
+import { FAQ_V2_EXTRA } from '../../content/copy-v2';
+---
+
+<section id="faq" class="section bg-white">
+  <div class="container faq-section">
+    <h2 class="h2">Frequently Asked Questions</h2>
+    <Faq items={[...FAQ_V2_EXTRA, ...FAQ_ITEMS]} />
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: 900px;
+    margin-inline: auto;
+  }
+</style>

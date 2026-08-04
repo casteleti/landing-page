@@ -9,8 +9,8 @@
 
 export type HeroVariant = 'a' | 'b' | 'c';
 
-export const PRICE = '$37'; // placeholder — recommended range $37–$47 (Docs/01 §VARIÁVEIS)
-export const PRICE_RAW = 37; // numeric value for JSON-LD / dataLayer, keep in sync with PRICE
+export const PRICE = '$9'; // scripts/build-images.mjs reads this literal for the OG card
+export const PRICE_RAW = 9; // numeric value for JSON-LD / dataLayer, keep in sync with PRICE
 export const CURRENCY = 'USD';
 
 export const CHECKOUT_URL = '#checkout-pending'; // placeholder — replace with Stripe/ThriveCart URL
@@ -36,3 +36,17 @@ export const HERO_HEADLINES: Record<HeroVariant, string> = {
 };
 
 export const COMBINED_VALUE = 397; // 67+37+37+27+37+27+27+37+47+27+27 — verified in QA checklist §A
+
+/**
+ * Section 11 promises "real preview pages from the Blueprint and bonus guides".
+ * It stays hidden until actual PDF page exports exist — lifestyle photography there
+ * would misrepresent the product. Flip to true once the six previews are in
+ * public/images/previews/ and wired into S11Preview.astro.
+ */
+export const SHOW_PDF_PREVIEWS = false;
+
+/**
+ * Section 12 renders CREATOR_NAME / CREATOR_BIO and a real founder photo.
+ * Stays hidden while both are placeholders.
+ */
+export const SHOW_CREATOR_SECTION = false;

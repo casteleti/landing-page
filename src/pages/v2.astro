@@ -1,0 +1,66 @@
+---
+/**
+ * /v2 — same product, repositioned around the post-GLP-1 transition.
+ *
+ * Sections with rewritten copy live in src/sections/v2/. Sections that only
+ * describe the product (How It Works, Guarantee) are imported from v1 so the two
+ * pages can never disagree about what is being sold.
+ *
+ * Buttons run green here instead of orange — the override at the bottom of this
+ * file only applies to this page.
+ */
+import Base from '../layouts/Base.astro';
+import S01Header from '../sections/S01Header.astro';
+import S02Hero from '../sections/v2/S02Hero.astro';
+import S03TrustBar from '../sections/v2/S03TrustBar.astro';
+import S04Problem from '../sections/v2/S04Problem.astro';
+import S05System from '../sections/v2/S05System.astro';
+import S06Blueprint from '../sections/v2/S06Blueprint.astro';
+import S07Bonuses from '../sections/v2/S07Bonuses.astro';
+import S08Stack from '../sections/v2/S08Stack.astro';
+import S09HowItWorks from '../sections/S09HowItWorks.astro';
+import S10WhoItsFor from '../sections/v2/S10WhoItsFor.astro';
+import S11Preview from '../sections/S11Preview.astro';
+import S12Creator from '../sections/S12Creator.astro';
+import S13Offer from '../sections/v2/S13Offer.astro';
+import S14Guarantee from '../sections/S14Guarantee.astro';
+import S15Faq from '../sections/v2/S15Faq.astro';
+import S16FinalCtaFooter from '../sections/v2/S16FinalCtaFooter.astro';
+import StickyCta from '../components/StickyCta.astro';
+import { SHOW_PDF_PREVIEWS, SHOW_CREATOR_SECTION } from '../config';
+import { HERO_V2 } from '../content/copy-v2';
+
+const title = 'The Treatment May Stop. Your Plan Shouldn’t. — The GLP-1 Success Blueprint™';
+---
+
+<Base title={title} description={HERO_V2.subheadline}>
+  <S01Header slot="header" />
+  <S02Hero />
+  <S03TrustBar />
+  <S04Problem />
+  <S05System />
+  <S06Blueprint />
+  <S07Bonuses />
+  <S08Stack />
+  <S09HowItWorks />
+  <S10WhoItsFor />
+  {SHOW_PDF_PREVIEWS && <S11Preview />}
+  {SHOW_CREATOR_SECTION && <S12Creator />}
+  <S13Offer />
+  <S14Guarantee />
+  <S15Faq />
+  <S16FinalCtaFooter />
+  <StickyCta slot="sticky" />
+</Base>
+
+<style is:global>
+  /*
+    Green action colour for this page only. Measured against white text:
+    #3D6B2A = 6.30:1 and #2E5A22 = 8.07:1, both clear of the 4.5:1 AA threshold.
+  */
+  :root {
+    --cta-primary: #3D6B2A;
+    --cta-hover: #2E5A22;
+    --cta-active: #24461A;
+  }
+</style>

@@ -1,0 +1,250 @@
+---
+// v2 SEÇÃO 2 — HERO. Copy: src/content/copy-v2.ts
+import Cta from '../../components/Cta.astro';
+import Icon from '../../components/Icon.astro';
+import { PRICE, COMBINED_VALUE } from '../../config';
+import { HERO_V2 } from '../../content/copy-v2';
+
+const [before, after] = HERO_V2.headline.split(HERO_V2.highlight);
+
+// Browsers break a line at the hyphen in "GLP-1", orphaning the "1" on a phone.
+const noBreakProduct = (text: string) =>
+  text.replace(/GLP-1/g, '<span style="white-space:nowrap">GLP-1</span>');
+---
+
+<section id="hero" class="hero section bg-main">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow">{HERO_V2.eyebrow}</p>
+
+      <h1 class="h1 hero__headline">
+        {before}<mark>{HERO_V2.highlight}</mark>{after}
+      </h1>
+
+      <p class="subheadline hero__subheadline" set:html={noBreakProduct(HERO_V2.subheadline)} />
+
+      <div class="hero__mockup hero__mockup--mobile">
+        <figure class="hero-photo">
+          <img
+            src="/images/hero-phone.webp"
+            width="928"
+            height="1160"
+            alt="Woman reading one of the guides on her phone at home"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption class="hero-photo__badge">
+            <strong>The GLP-1 Success Blueprint™</strong>
+            <span>4-phase system + 10 practical guides</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <Cta label={`Get Instant Access — ${PRICE}`} position="hero" class="hero__cta" />
+
+      <p class="hero__anchor">
+        <s>${COMBINED_VALUE} combined reference value</s>
+        <span>Today {PRICE} — one-time, no subscription</span>
+      </p>
+
+      <p class="hero__microcopy">
+        <span>Instant digital download</span>
+        <span aria-hidden="true">·</span>
+        <span>Any phone, tablet or desktop</span>
+        <span aria-hidden="true">·</span>
+        <span>7-day money-back guarantee</span>
+      </p>
+
+      <p class="hero__badge">
+        <Icon name="graduation-cap" size={16} />
+        <span>{HERO_V2.badge}</span>
+      </p>
+    </div>
+
+    <div class="hero__mockup hero__mockup--desktop">
+      <figure class="hero-photo">
+        <img
+          src="/images/hero-phone.webp"
+          width="928"
+          height="1160"
+          alt="Woman reading one of the guides on her phone at home"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
+        <figcaption class="hero-photo__badge">
+          <strong>The GLP-1 Success Blueprint™</strong>
+          <span>4-phase system + 10 practical guides</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(180deg, #F7F5EF 0%, #FFFFFF 100%);
+    padding-top: var(--space-6);
+  }
+
+  .hero__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .hero__content {
+      flex: 0 0 55%;
+    }
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .hero__eyebrow {
+    max-width: 46ch;
+  }
+
+  .hero__headline {
+    margin-top: 4px;
+  }
+
+  .hero-photo {
+    position: relative;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-product);
+  }
+
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-image);
+    background: linear-gradient(180deg, rgba(52, 68, 38, 0) 52%, rgba(52, 68, 38, 0.32) 100%);
+    pointer-events: none;
+  }
+
+  .hero-photo__badge {
+    position: absolute;
+    left: var(--space-2);
+    right: var(--space-2);
+    bottom: var(--space-2);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: var(--radius-button);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero-photo__badge strong {
+    font-family: var(--font-functional);
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--brand-dark);
+  }
+
+  .hero-photo__badge span {
+    font-family: var(--font-functional);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
+  .hero__mockup--mobile {
+    margin-block: var(--space-2);
+  }
+
+  .hero__mockup--desktop {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .hero__mockup--mobile {
+      display: none;
+    }
+
+    .hero__mockup--desktop {
+      display: block;
+      flex: 0 0 45%;
+    }
+
+    .hero__mockup--desktop .hero-photo {
+      max-width: 480px;
+    }
+  }
+
+  :global(.hero__cta) {
+    margin-top: var(--space-2);
+  }
+
+  .hero__anchor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0;
+    font-family: var(--font-functional);
+    font-size: 14px;
+  }
+
+  .hero__anchor s {
+    color: var(--text-muted-aa);
+  }
+
+  .hero__anchor span {
+    font-weight: 700;
+    color: var(--brand-dark);
+  }
+
+  .hero__microcopy {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    font-family: var(--font-functional);
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    margin-top: var(--space-1);
+    padding: 8px 14px;
+    background: var(--bg-soft-green);
+    color: var(--brand-dark);
+    border-radius: var(--radius-badge);
+    font-family: var(--font-functional);
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+
+  .hero__badge :global(svg) {
+    flex-shrink: 0;
+    color: var(--brand-green);
+  }
+</style>

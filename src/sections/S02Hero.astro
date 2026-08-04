@@ -12,6 +12,11 @@ const [before, after] =
   HERO_VARIANT === 'a' && headline.includes(highlightPhrase)
     ? headline.split(highlightPhrase)
     : [headline, null];
+
+// Browsers happily break a line at the hyphen in "GLP-1", which on a phone
+// leaves an orphaned "1" starting the next line. Keep the term intact.
+const noBreakProduct = (text: string) =>
+  text.replace(/GLP-1/g, '<span style="white-space:nowrap">GLP-1</span>');
 ---
 
 <section id="hero" class="hero section bg-main">
@@ -24,10 +29,10 @@ const [before, after] =
       <h1 class="h1 hero__headline">
         {after !== null ? (
           <>
-            {before}<mark>{highlightPhrase}</mark>{after}
+            {before}<mark set:html={noBreakProduct(highlightPhrase)} />{after}
           </>
         ) : (
-          headline
+          <Fragment set:html={noBreakProduct(headline)} />
         )}
       </h1>
 
@@ -38,15 +43,21 @@ const [before, after] =
       </p>
 
       <div class="hero__mockup hero__mockup--mobile">
-        <img
-          src="/images/hero-mockup.svg"
-          width="480"
-          height="600"
-          alt="Preview of The GLP-1 Success Blueprint cover and two bonus guide covers"
-          fetchpriority="high"
-          loading="eager"
-          decoding="async"
-        />
+        <figure class="hero-photo">
+          <img
+            src="/images/hero-blueprint.webp"
+            width="928"
+            height="1152"
+            alt="Woman reviewing her GLP-1 plan in a bright kitchen, with an injector pen, a small plate, and a glass of water on the counter"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption class="hero-photo__badge">
+            <strong>The GLP-1 Success Blueprint™</strong>
+            <span>4-phase system + 10 practical guides</span>
+          </figcaption>
+        </figure>
       </div>
 
       <Cta label={`Get Instant Access — ${PRICE}`} position="hero" class="hero__cta" />
@@ -66,15 +77,21 @@ const [before, after] =
     </div>
 
     <div class="hero__mockup hero__mockup--desktop">
-      <img
-        src="/images/hero-mockup.svg"
-        width="480"
-        height="600"
-        alt="Preview of The GLP-1 Success Blueprint cover and two bonus guide covers"
-        fetchpriority="high"
-        loading="eager"
-        decoding="async"
-      />
+      <figure class="hero-photo">
+        <img
+          src="/images/hero-blueprint.webp"
+          width="928"
+          height="1152"
+          alt="Woman reviewing her GLP-1 plan in a bright kitchen, with an injector pen, a small plate, and a glass of water on the counter"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
+        <figcaption class="hero-photo__badge">
+          <strong>The GLP-1 Success Blueprint™</strong>
+          <span>4-phase system + 10 practical guides</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -123,6 +140,60 @@ const [before, after] =
     margin-inline: auto;
   }
 
+  .hero-photo {
+    position: relative;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-product);
+  }
+
+  /* Quiet gradient anchors the badge and blends the photo into the section */
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-image);
+    background: linear-gradient(180deg, rgba(52, 68, 38, 0) 52%, rgba(52, 68, 38, 0.32) 100%);
+    pointer-events: none;
+  }
+
+  .hero-photo__badge {
+    position: absolute;
+    left: var(--space-2);
+    right: var(--space-2);
+    bottom: var(--space-2);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: var(--radius-button);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero-photo__badge strong {
+    font-family: var(--font-functional);
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--brand-dark);
+  }
+
+  .hero-photo__badge span {
+    font-family: var(--font-functional);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
   .hero__mockup--mobile {
     margin-block: var(--space-2);
   }
@@ -143,6 +214,10 @@ const [before, after] =
 
     .hero__mockup--desktop img {
       max-width: 100%;
+    }
+
+    .hero__mockup--desktop .hero-photo {
+      max-width: 480px;
     }
   }
 

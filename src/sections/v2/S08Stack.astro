@@ -1,0 +1,257 @@
+---
+// v2 SEÇÃO 8 — TUDO EM UM SÓ SISTEMA. The item list and values are the v1
+// product spec, verbatim. Copy: src/content/copy-v2.ts
+import Cta from '../../components/Cta.astro';
+import Icon from '../../components/Icon.astro';
+import { PRICE, COMBINED_VALUE } from '../../config';
+import { STACK_V2 } from '../../content/copy-v2';
+
+const items = [
+  { name: 'The GLP-1 Success Blueprint™ (80–120 pages)', value: 67 },
+  { name: 'Side Effect Survival Guide™', value: 37 },
+  { name: 'First 30 Days Survival Guide™', value: 37 },
+  { name: 'Protein Priority Playbook™', value: 27 },
+  { name: 'Muscle Preservation Blueprint™', value: 37 },
+  { name: 'Face & Body Defense Guide™', value: 27 },
+  { name: 'Plateau Breaker Protocol™', value: 27 },
+  { name: 'Life After GLP-1™', value: 37 },
+  { name: 'High-Protein Recipe Book™', value: 47 },
+  { name: 'Food Noise Workbook™', value: 27 },
+  { name: 'Restaurant & Social Survival Guide™', value: 27 },
+];
+---
+
+<section id="stack" class="section bg-cream">
+  <div class="container stack">
+    <div class="stack__visual">
+      <div class="stack-collage" role="img" aria-label="Collage of the GLP-1 Success Blueprint guide library">
+        <img
+          class="stack-collage__img stack-collage__img--left"
+          src="/images/covers/protein-priority.webp"
+          width="480"
+          height="600"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="stack-collage__img stack-collage__img--right"
+          src="/images/covers/muscle-preservation.webp"
+          width="480"
+          height="600"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="stack-collage__img stack-collage__img--front"
+          src="/images/digital-tablet-tight.webp"
+          width="480"
+          height="600"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="stack-collage__badge">11 digital guides</span>
+      </div>
+    </div>
+
+    <div class="stack__content">
+      <h2 class="h2" style="color: var(--brand-dark)">{STACK_V2.heading}</h2>
+
+      <ul class="stack__list">
+        {items.map((item) => (
+          <li>
+            <span class="stack__list-name">
+              <Icon name="check" size={16} />
+              <span>{item.name}</span>
+            </span>
+            <span class="stack__list-value">${item.value}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="stack__summary">
+        <p class="stack__reference">Combined Reference Value: <s>${COMBINED_VALUE}</s></p>
+        <p class="stack__today">Today: {PRICE} <span>one-time payment</span></p>
+        <p class="stack__reframe">{STACK_V2.priceReframe}</p>
+      </div>
+
+      <Cta label={`Get Instant Access — ${PRICE}`} position="stack" />
+
+      <p class="stack__microcopy">
+        <Icon name="lock" size={14} />
+        <span>Secure checkout <span aria-hidden="true">·</span> Instant access <span aria-hidden="true">·</span> No subscription</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 900px) {
+    .stack {
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .stack__visual,
+    .stack__content {
+      flex: 1;
+    }
+  }
+
+  .stack-collage {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 8 / 9;
+    margin-inline: auto;
+  }
+
+  .stack-collage__img {
+    position: absolute;
+    width: 58%;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius-image);
+    border: 4px solid var(--white);
+  }
+
+  .stack-collage__img--left {
+    left: 0;
+    top: 6%;
+    transform: rotate(-6deg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .stack-collage__img--right {
+    right: 0;
+    top: 2%;
+    transform: rotate(5deg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .stack-collage__img--front {
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    width: 62%;
+    box-shadow: var(--shadow-product);
+  }
+
+  .stack-collage__badge {
+    position: absolute;
+    left: 50%;
+    bottom: -2%;
+    transform: translateX(-50%);
+    z-index: 1;
+    white-space: nowrap;
+    background: var(--brand-dark);
+    color: var(--white);
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: var(--radius-badge);
+    box-shadow: var(--shadow-cta);
+  }
+
+  .stack__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .stack__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stack__list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    border-bottom: 1px dashed var(--border-light);
+    padding-bottom: 8px;
+  }
+
+  .stack__list-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-functional);
+    font-size: 15px;
+    color: var(--brand-dark);
+  }
+
+  .stack__list-name :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+  }
+
+  .stack__list-value {
+    font-family: var(--font-functional);
+    font-size: 14px;
+    color: var(--text-muted-aa);
+    white-space: nowrap;
+  }
+
+  .stack__summary {
+    margin-top: var(--space-2);
+  }
+
+  .stack__reference {
+    font-family: var(--font-functional);
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .stack__today {
+    font-family: var(--font-editorial);
+    font-size: 34px;
+    color: var(--brand-dark);
+    margin: 4px 0 0;
+  }
+
+  .stack__today span {
+    font-family: var(--font-functional);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: 8px;
+  }
+
+  .stack__reframe {
+    font-family: var(--font-functional);
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 6px 0 0;
+  }
+
+  .stack__microcopy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-functional);
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .stack__microcopy :global(svg) {
+    color: var(--brand-green);
+  }
+</style>

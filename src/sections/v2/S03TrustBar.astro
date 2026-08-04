@@ -1,0 +1,58 @@
+---
+// v2 SEÇÃO 3 — TRUST BAR. Copy: src/content/copy-v2.ts
+import Icon from '../../components/Icon.astro';
+import { TRUST_V2 } from '../../content/copy-v2';
+---
+
+<section id="trust-bar" class="trust-bar bg-white">
+  <div class="container trust-bar__inner">
+    {TRUST_V2.map((item) => (
+      <p class="trust-bar__item">
+        <Icon name="check" size={16} />
+        <span>{item}</span>
+      </p>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .trust-bar__inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2) var(--space-3);
+  }
+
+  @media (min-width: 900px) {
+    .trust-bar__inner {
+      grid-template-columns: repeat(5, auto);
+      justify-content: center;
+      gap: var(--space-4);
+    }
+  }
+
+  .trust-bar__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-family: var(--font-functional);
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .trust-bar__item :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 900px) {
+    .trust-bar__item {
+      font-size: 15px;
+    }
+  }
+</style>

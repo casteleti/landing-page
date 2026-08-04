@@ -1,0 +1,160 @@
+---
+// v2 SEÇÃO 6 — O QUE VOCÊ RECEBE. Copy: src/content/copy-v2.ts
+// Phase descriptions, the tool chips and the file-details line are the v1
+// product spec, verbatim.
+import PhaseCard from '../../components/PhaseCard.astro';
+import Cta from '../../components/Cta.astro';
+import Icon from '../../components/Icon.astro';
+import { PRICE } from '../../config';
+import { BLUEPRINT_V2 } from '../../content/copy-v2';
+
+const phases = [
+  {
+    number: '1',
+    title: 'Phase 1 — PRIME',
+    tagline: '',
+    description:
+      'How GLP-1 medications work in plain language, questions to bring your prescriber, baseline tracking, and a printable readiness checklist.',
+    alt: 'Woman writing her starting plan in a notebook at a sunlit table, injector pen beside her',
+    photo: '/images/covers/first-30-days.webp',
+  },
+  {
+    number: '2',
+    title: 'Phase 2 — INITIATE',
+    tagline: '',
+    description:
+      'Week-by-week guidance for your first month: common vs. concerning symptoms, tolerable meals, hydration principles, and a weekly adaptation scorecard.',
+    alt: 'Woman resting on a sofa with a hand on her stomach, tea and water nearby, easing through early symptoms',
+    photo: '/images/covers/side-effect-survival.webp',
+  },
+  {
+    number: '3',
+    title: 'Phase 3 — OPTIMIZE',
+    tagline: '',
+    description:
+      'Protein made practical, muscle-supporting habits, minimum effective movement, and how to review a stall calmly before reacting.',
+    alt: 'Woman doing a resistance-band exercise at home to support her strength',
+    photo: '/images/covers/muscle-preservation.webp',
+  },
+  {
+    number: '4',
+    title: 'Phase 4 — SUSTAIN',
+    tagline: '',
+    description:
+      'Maintenance routines, social flexibility, early-warning checklists, and a 90-day maintenance roadmap.',
+    alt: 'Woman walking confidently along a sunlit park path, settled into her long-term routine',
+    photo: '/images/covers/life-after-glp1.webp',
+  },
+];
+
+const tools = [
+  'The Priority Plate™',
+  'Protein Quick-Math Guide',
+  'Symptom → Action Matrix',
+  'Weekly Review Template',
+  'Body Composition Log',
+  '5 educational Decision Trees (nausea, constipation, low appetite, hydration, plateau)',
+];
+---
+
+<section id="blueprint" class="section bg-white">
+  <div class="container blueprint">
+    <div class="blueprint__intro">
+      <h2 class="h2">{BLUEPRINT_V2.heading}</h2>
+      <p class="subheadline" style="max-width: 640px;">{BLUEPRINT_V2.subheading}</p>
+    </div>
+
+    <div class="blueprint__phases">
+      {phases.map((phase) => (
+        <PhaseCard
+          variant="preview"
+          number={phase.number}
+          title={phase.title}
+          tagline={phase.tagline}
+          description={phase.description}
+          previewAlt={phase.alt}
+          photo={phase.photo}
+        />
+      ))}
+    </div>
+
+    <div class="blueprint__chips">
+      {tools.map((tool) => (
+        <span class="chip">{tool}</span>
+      ))}
+    </div>
+
+    <div class="blueprint__file-details">
+      <Icon name="document" size={26} />
+      <p class="body-secondary">
+        Premium PDF, 80–120 pages <span aria-hidden="true">·</span> Clickable table of
+        contents <span aria-hidden="true">·</span> Optimized for phone, tablet, and desktop
+        <span aria-hidden="true">·</span> Printable in US Letter and A4
+        <span aria-hidden="true">·</span> Measurements in US and metric units
+        <span aria-hidden="true">·</span> English language <span aria-hidden="true">·</span>
+        Personal-use license <span aria-hidden="true">·</span> Instant download after checkout
+      </p>
+    </div>
+
+    <Cta label={`Get the Blueprint — ${PRICE}`} position="blueprint" />
+  </div>
+</section>
+
+<style>
+  .blueprint {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .blueprint__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 720px;
+  }
+
+  .blueprint__phases {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 900px) {
+    .blueprint__phases {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .blueprint__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    background: var(--bg-soft-green);
+    color: var(--brand-dark);
+    font-family: var(--font-functional);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: var(--radius-badge);
+  }
+
+  .blueprint__file-details {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-card);
+    padding: var(--space-3);
+  }
+
+  .blueprint__file-details :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+</style>

@@ -9,15 +9,22 @@ export interface Props {
   bullets: string[];
   value: number;
   coverAlt: string;
+  cover?: string;
 }
 
-const { title, subtitle, painLine, bullets, value, coverAlt } = Astro.props;
+const { title, subtitle, painLine, bullets, value, coverAlt, cover } = Astro.props;
 ---
 
 <article class="bonus-card">
-  <div class="bonus-card__cover" role="img" aria-label={coverAlt}>
-    <span class="bonus-card__cover-label">COVER<br />pending asset</span>
-  </div>
+  {cover ? (
+    <div class="bonus-card__cover bonus-card__cover--photo">
+      <img src={cover} width="480" height="600" alt={coverAlt} loading="lazy" decoding="async" />
+    </div>
+  ) : (
+    <div class="bonus-card__cover" role="img" aria-label={coverAlt}>
+      <span class="bonus-card__cover-label">COVER<br />pending asset</span>
+    </div>
+  )}
 
   <div class="bonus-card__body">
     <h4 class="bonus-card__title">{title}</h4>
@@ -60,6 +67,8 @@ const { title, subtitle, painLine, bullets, value, coverAlt } = Astro.props;
 
   .bonus-card__cover {
     flex-shrink: 0;
+    /* flex-start keeps the 4:5 crop; stretching would let row height dictate it */
+    align-self: flex-start;
     width: 100%;
     max-width: 160px;
     aspect-ratio: 4 / 5;
@@ -69,6 +78,29 @@ const { title, subtitle, painLine, bullets, value, coverAlt } = Astro.props;
     align-items: center;
     justify-content: center;
     text-align: center;
+  }
+
+  .bonus-card__cover--photo {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bonus-card__cover--photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+  }
+
+  /* Soft sage wash so every cover sits in the same tonal family */
+  .bonus-card__cover--photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(76, 98, 53, 0) 55%, rgba(52, 68, 38, 0.16) 100%);
+    pointer-events: none;
   }
 
   .bonus-card__cover-label {

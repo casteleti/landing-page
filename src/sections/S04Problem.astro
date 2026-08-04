@@ -11,31 +11,92 @@ const bullets = [
 ---
 
 <section id="problem" class="section bg-white">
-  <div class="container reading-column problem">
-    <h2 class="h2">Sound Familiar?</h2>
+  <div class="container problem__grid">
+    <div class="problem">
+      <h2 class="h2">Sound Familiar?</h2>
 
-    <ul class="problem__list">
-      {bullets.map((bullet) => (
-        <li>
-          <span class="problem__dot" aria-hidden="true"></span>
-          <span class="body">{bullet}</span>
-        </li>
-      ))}
-    </ul>
+      <ul class="problem__list">
+        {bullets.map((bullet) => (
+          <li>
+            <span class="problem__dot" aria-hidden="true"></span>
+            <span class="body">{bullet}</span>
+          </li>
+        ))}
+      </ul>
 
-    <p class="body problem__closing">
-      Your medication changed your appetite. But nobody handed you a plan for what happens
-      next — the meals, the symptoms, the routines, the real-life decisions. You don't need
-      more noise. <strong>You need a practical roadmap.</strong>
-    </p>
+      <p class="body problem__closing">
+        Your medication changed your appetite. But nobody handed you a plan for what happens
+        next — the meals, the symptoms, the routines, the real-life decisions. You don't need
+        more noise. <strong>You need a practical roadmap.</strong>
+      </p>
+    </div>
+
+    <figure class="problem__figure">
+      <img
+        src="/images/problem-companion.webp"
+        width="560"
+        height="630"
+        alt="Woman sitting on the edge of her bed, looking at a bathroom scale with a thoughtful expression"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
   </div>
 </section>
 
 <style>
+  .problem__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 900px) {
+    .problem__grid {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .problem {
+      flex: 0 0 58%;
+    }
+
+    .problem__figure {
+      flex: 1;
+    }
+  }
+
   .problem {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    max-width: 68ch;
+  }
+
+  .problem__figure {
+    position: relative;
+    max-width: 420px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .problem__figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Warm cream wash keeps the photo from competing with the copy beside it */
+  .problem__figure::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-image);
+    background: linear-gradient(160deg, rgba(247, 245, 239, 0.28) 0%, rgba(52, 68, 38, 0.12) 100%);
+    pointer-events: none;
   }
 
   .problem__list {

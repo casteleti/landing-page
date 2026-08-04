@@ -1,13 +1,24 @@
 ---
 // Section 1 — Header. design.md §6.8 · Docs/01-sections-copy.md SEÇÃO 1
 import Cta from './Cta.astro';
-import { BRAND_NAME } from '../config';
+import { BRAND_NAME, PRICE } from '../config';
+
+// Full label would collide with the logo on a 360px screen; CSS swaps in the
+// short one below 640px via the two spans.
+const headerCtaLabel = `Get Access — ${PRICE}`;
 ---
 
 <header class="site-header" id="header">
   <div class="container site-header__inner">
     <a href="#hero" class="site-header__logo" aria-label={`${BRAND_NAME} — home`}>
-      {BRAND_NAME}
+      <img
+        src="/images/logo-full.webp"
+        width="440"
+        height="77"
+        alt={BRAND_NAME}
+        fetchpriority="high"
+        decoding="async"
+      />
     </a>
 
     <div class="site-header__right">
@@ -15,7 +26,7 @@ import { BRAND_NAME } from '../config';
         Secure checkout <span aria-hidden="true">·</span> Instant digital access
       </p>
       <Cta
-        label="Get Instant Access"
+        label={headerCtaLabel}
         position="header"
         variant="secondary"
         fullWidthMobile={false}
@@ -42,7 +53,8 @@ import { BRAND_NAME } from '../config';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    gap: var(--space-2);
+    height: 64px;
   }
 
   @media (min-width: 900px) {
@@ -52,17 +64,19 @@ import { BRAND_NAME } from '../config';
   }
 
   .site-header__logo {
-    font-family: var(--font-editorial);
-    font-weight: 400;
-    font-size: 20px;
-    color: var(--brand-green);
-    max-width: 150px;
+    display: block;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .site-header__logo img {
+    width: auto;
+    height: 30px;
   }
 
   @media (min-width: 900px) {
-    .site-header__logo {
-      font-size: 24px;
-      max-width: 230px;
+    .site-header__logo img {
+      height: 40px;
     }
   }
 
@@ -70,6 +84,7 @@ import { BRAND_NAME } from '../config';
     display: flex;
     align-items: center;
     gap: var(--space-3);
+    flex-shrink: 0;
   }
 
   .site-header__trust {
@@ -88,16 +103,17 @@ import { BRAND_NAME } from '../config';
   }
 
   :global(.site-header__cta) {
-    height: 44px;
-    padding: 0 20px;
+    min-height: 42px;
+    padding: 8px 14px;
     font-size: 14px;
+    white-space: nowrap;
   }
 
   @media (min-width: 900px) {
     :global(.site-header__cta) {
-      height: 48px;
+      min-height: 48px;
       font-size: 15px;
-      padding: 0 24px;
+      padding: 10px 24px;
     }
   }
 

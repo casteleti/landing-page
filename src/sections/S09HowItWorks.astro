@@ -1,5 +1,7 @@
 ---
 // SEÇÃO 9 — COMO USAR. Docs/01-sections-copy.md SEÇÃO 9
+import Icon from '../components/Icon.astro';
+
 const steps = [
   { title: '1. Purchase', description: 'Complete secure checkout in under a minute.' },
   { title: '2. Download instantly', description: 'Get every guide right away, on any device.' },
@@ -19,17 +21,34 @@ const steps = [
   <div class="container how">
     <h2 class="h2">How It Works</h2>
 
-    <ol class="how__list">
-      {steps.map((step, index) => (
-        <li>
-          <span class="how__number" aria-hidden="true">{index + 1}</span>
-          <div>
-            <p class="h3 how__title">{step.title.replace(/^\d+\.\s*/, '')}</p>
-            <p class="body how__description">{step.description}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
+    <div class="how__grid">
+      <ol class="how__list">
+        {steps.map((step, index) => (
+          <li>
+            <span class="how__number" aria-hidden="true">{index + 1}</span>
+            <div>
+              <p class="h3 how__title">{step.title.replace(/^\d+\.\s*/, '')}</p>
+              <p class="body how__description">{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <figure class="how__figure">
+        <img
+          src="/images/digital-tablet.webp"
+          width="800"
+          height="1000"
+          alt="Woman reading one of the guides on a tablet at her kitchen table"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="how__figure-caption">
+          <Icon name="check" size={15} />
+          <span>Read on phone, tablet or desktop — or print it</span>
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -40,39 +59,92 @@ const steps = [
     gap: var(--space-6);
   }
 
-  .how__list {
+  .how__grid {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    counter-reset: step;
+    gap: var(--space-5);
   }
 
   @media (min-width: 900px) {
-    .how__list {
+    .how__grid {
       flex-direction: row;
-      justify-content: space-between;
-      gap: var(--space-3);
+      align-items: center;
+      gap: var(--space-8);
     }
+
+    .how__list {
+      flex: 0 0 55%;
+    }
+
+    .how__figure {
+      flex: 1;
+    }
+  }
+
+  .how__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    counter-reset: step;
   }
 
   .how__list li {
     display: flex;
     gap: var(--space-2);
+    align-items: flex-start;
     max-width: 100%;
   }
 
-  @media (min-width: 900px) {
-    .how__list li {
-      flex-direction: column;
-      gap: var(--space-2);
-      flex: 1;
-    }
+  .how__figure {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .how__figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-product);
+  }
+
+  .how__figure-caption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    left: var(--space-2);
+    right: var(--space-2);
+    bottom: var(--space-2);
+    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: var(--radius-button);
+    box-shadow: var(--shadow-card);
+    font-family: var(--font-functional);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--brand-dark);
+  }
+
+  .how__figure-caption :global(svg) {
+    color: var(--brand-green);
+    flex-shrink: 0;
   }
 
   .how__number {
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: var(--bg-soft-green);
     font-family: var(--font-editorial);
-    font-size: 32px;
+    font-size: 20px;
     color: var(--brand-green);
     line-height: 1;
   }

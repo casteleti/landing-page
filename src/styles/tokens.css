@@ -22,9 +22,13 @@
   --text-secondary: #4A4D47;
   --white: #FFFFFF;
 
-  /* ---- 3.3 CTA (only orange in the page) ---- */
-  --cta-primary: #C96F3B;
-  --cta-hover: #AD5C31;
+  /* ---- 3.3 CTA (only orange in the page) ----
+     Darkened from the original #C96F3B: white on that measured 3.61:1, which
+     fails AA for the button's text size. #A85428 measures 5.30:1. */
+  --cta-primary: #A85428;
+  --cta-hover: #8F441D;
+  --cta-active: #7A3916;
+  --cta-glow: #C96F3B; /* original tint, kept for focus rings and accents */
   --cta-soft: #F2D6C4;
 
   /* ---- 3.4 Semantic ---- */

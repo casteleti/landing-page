@@ -3,9 +3,11 @@ import { CHECKOUT_URL, HERO_VARIANT } from '../config';
 
 export interface Props {
   label: string;
-  position: 'header' | 'hero' | 'blueprint' | 'stack' | 'offer' | 'final';
+  position: 'header' | 'hero' | 'blueprint' | 'stack' | 'offer' | 'final' | 'sticky';
   variant?: 'primary' | 'secondary';
   fullWidthMobile?: boolean;
+  /** Small reassurance line rendered under the button */
+  subLabel?: string;
   class?: string;
 }
 
@@ -14,6 +16,7 @@ const {
   position,
   variant = 'primary',
   fullWidthMobile = true,
+  subLabel,
   class: className = '',
 } = Astro.props;
 ---
@@ -25,21 +28,31 @@ const {
   data-cta-position={position}
   data-hero-variant={HERO_VARIANT}
 >
-  {label}
+  <span class="cta__label">{label}</span>
+  {variant === 'primary' && (
+    <svg class="cta__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+         stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 12h13" /><path d="m12 5 7 7-7 7" />
+    </svg>
+  )}
 </a>
+{subLabel && <span class="cta__sub">{subLabel}</span>}
 
 <style>
   .cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 56px;
-    padding: 0 32px;
+    gap: 10px;
+    min-height: 60px;
+    padding: 14px 30px;
     border-radius: var(--radius-button);
     font-family: var(--font-functional);
-    font-weight: 650;
-    font-size: 17px;
-    line-height: 1;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
     white-space: normal;
     text-align: center;
     transition: background var(--duration-fast) var(--ease-standard),
@@ -47,25 +60,49 @@ const {
       box-shadow var(--duration-fast) var(--ease-standard);
   }
 
+  .cta__arrow {
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
   .cta--primary {
     background: var(--cta-primary);
     color: var(--white);
-    box-shadow: var(--shadow-cta);
+    box-shadow: 0 6px 18px rgba(70, 45, 30, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
 
   .cta--primary:hover {
     background: var(--cta-hover);
     transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(70, 45, 30, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .cta--primary:hover .cta__arrow {
+    transform: translateX(3px);
+  }
+
+  /* Touch devices have no hover — the press state is the only feedback there */
+  .cta--primary:active {
+    background: var(--cta-active);
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(70, 45, 30, 0.24);
   }
 
   .cta--secondary {
     background: transparent;
     color: var(--brand-green);
-    border: 1px solid var(--brand-green);
+    border: 1.5px solid var(--brand-green);
+    font-size: 16px;
+    min-height: 48px;
+    padding: 10px 22px;
   }
 
   .cta--secondary:hover {
     background: var(--bg-soft-green);
+  }
+
+  .cta--secondary:active {
+    background: var(--bg-cream);
   }
 
   .cta--full-mobile {
@@ -78,11 +115,19 @@ const {
     }
   }
 
+  .cta__sub {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--font-functional);
+    font-size: 13.5px;
+    color: var(--text-muted-aa);
+  }
+
   @media (max-width: 639px) {
     .cta {
-      height: 52px;
-      font-size: 16px;
-      padding: 0 24px;
+      min-height: 58px;
+      font-size: 17px;
+      padding: 13px 20px;
     }
   }
 </style>

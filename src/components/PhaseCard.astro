@@ -10,6 +10,7 @@ export interface Props {
   variant?: 'icon' | 'preview';
   icon?: 'checklist' | 'calendar' | 'bolt' | 'infinity';
   previewAlt?: string;
+  photo?: string;
 }
 
 const {
@@ -20,14 +21,21 @@ const {
   variant = 'icon',
   icon = 'checklist',
   previewAlt = '',
+  photo,
 } = Astro.props;
 ---
 
 <div class={`phase-card phase-card--${variant}`}>
   {variant === 'preview' && (
-    <div class="phase-card__preview" role="img" aria-label={previewAlt || `${title} preview page — pending asset`}>
-      <span class="phase-card__preview-label">PREVIEW<br />pending asset</span>
-    </div>
+    photo ? (
+      <div class="phase-card__preview phase-card__preview--photo">
+        <img src={photo} width="480" height="600" alt={previewAlt} loading="lazy" decoding="async" />
+      </div>
+    ) : (
+      <div class="phase-card__preview" role="img" aria-label={previewAlt || `${title} preview page — pending asset`}>
+        <span class="phase-card__preview-label">PREVIEW<br />pending asset</span>
+      </div>
+    )
   )}
 
   <div class="phase-card__body">
@@ -85,6 +93,28 @@ const {
     .phase-card__preview {
       width: 140px;
     }
+  }
+
+  .phase-card__preview--photo {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase-card__preview--photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+  }
+
+  .phase-card__preview--photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(76, 98, 53, 0) 58%, rgba(52, 68, 38, 0.18) 100%);
+    pointer-events: none;
   }
 
   .phase-card__preview-label {

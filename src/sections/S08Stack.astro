@@ -22,14 +22,36 @@ const items = [
 <section id="stack" class="section bg-cream">
   <div class="container stack">
     <div class="stack__visual">
-      <img
-        src="/images/stack-mockup.svg"
-        width="500"
-        height="562"
-        alt="Stack of all eleven GLP-1 Success Blueprint guides"
-        loading="lazy"
-        decoding="async"
-      />
+      <div class="stack-collage" role="img" aria-label="Collage of the GLP-1 Success Blueprint guide library">
+        <img
+          class="stack-collage__img stack-collage__img--left"
+          src="/images/covers/protein-priority.webp"
+          width="480"
+          height="600"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="stack-collage__img stack-collage__img--right"
+          src="/images/covers/muscle-preservation.webp"
+          width="480"
+          height="600"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="stack-collage__img stack-collage__img--front"
+          src="/images/digital-tablet-tight.webp"
+          width="480"
+          height="600"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="stack-collage__badge">11 digital guides</span>
+      </div>
     </div>
 
     <div class="stack__content">
@@ -82,10 +104,63 @@ const items = [
     }
   }
 
-  .stack__visual img {
+  .stack-collage {
+    position: relative;
     width: 100%;
     max-width: 380px;
+    aspect-ratio: 8 / 9;
     margin-inline: auto;
+  }
+
+  .stack-collage__img {
+    position: absolute;
+    width: 58%;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius-image);
+    border: 4px solid var(--white);
+  }
+
+  .stack-collage__img--left {
+    left: 0;
+    top: 6%;
+    transform: rotate(-6deg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .stack-collage__img--right {
+    right: 0;
+    top: 2%;
+    transform: rotate(5deg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .stack-collage__img--front {
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    width: 62%;
+    box-shadow: var(--shadow-product);
+  }
+
+  .stack-collage__badge {
+    position: absolute;
+    left: 50%;
+    bottom: -2%;
+    transform: translateX(-50%);
+    z-index: 1;
+    white-space: nowrap;
+    background: var(--brand-dark);
+    color: var(--white);
+    font-family: var(--font-functional);
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: var(--radius-badge);
+    box-shadow: var(--shadow-cta);
   }
 
   .stack__content {

@@ -16,6 +16,8 @@ import S13Offer from '../sections/S13Offer.astro';
 import S14Guarantee from '../sections/S14Guarantee.astro';
 import S15Faq from '../sections/S15Faq.astro';
 import S16FinalCtaFooter from '../sections/S16FinalCtaFooter.astro';
+import StickyCta from '../components/StickyCta.astro';
+import { SHOW_PDF_PREVIEWS, SHOW_CREATOR_SECTION } from '../config';
 ---
 
 <Base>
@@ -29,10 +31,11 @@ import S16FinalCtaFooter from '../sections/S16FinalCtaFooter.astro';
   <S08Stack />
   <S09HowItWorks />
   <S10WhoItsFor />
-  <S11Preview />
-  <S12Creator />
+  {SHOW_PDF_PREVIEWS && <S11Preview />}
+  {SHOW_CREATOR_SECTION && <S12Creator />}
   <S13Offer />
   <S14Guarantee />
   <S15Faq />
   <S16FinalCtaFooter />
+  <StickyCta slot="sticky" />
 </Base>

@@ -12,7 +12,8 @@ const phases = [
     tagline: '',
     description:
       'How GLP-1 medications work in plain language, questions to bring your prescriber, baseline tracking, and a printable readiness checklist.',
-    alt: 'Preview of the Phase 1 PRIME readiness checklist page',
+    alt: 'Woman writing her starting plan in a notebook at a sunlit table, injector pen beside her',
+    photo: '/images/covers/first-30-days.webp',
   },
   {
     number: '2',
@@ -20,7 +21,8 @@ const phases = [
     tagline: '',
     description:
       'Week-by-week guidance for your first month: common vs. concerning symptoms, tolerable meals, hydration principles, and a weekly adaptation scorecard.',
-    alt: 'Preview of the Phase 2 INITIATE weekly adaptation scorecard',
+    alt: 'Woman resting on a sofa with a hand on her stomach, tea and water nearby, easing through early symptoms',
+    photo: '/images/covers/side-effect-survival.webp',
   },
   {
     number: '3',
@@ -28,7 +30,8 @@ const phases = [
     tagline: '',
     description:
       'Protein made practical, muscle-supporting habits, minimum effective movement, and how to review a stall calmly before reacting.',
-    alt: 'Preview of the Phase 3 OPTIMIZE protein and movement page',
+    alt: 'Woman doing a resistance-band exercise at home to support her strength',
+    photo: '/images/covers/muscle-preservation.webp',
   },
   {
     number: '4',
@@ -36,7 +39,8 @@ const phases = [
     tagline: '',
     description:
       'Maintenance routines, social flexibility, early-warning checklists, and a 90-day maintenance roadmap.',
-    alt: 'Preview of the Phase 4 SUSTAIN 90-day maintenance roadmap',
+    alt: 'Woman walking confidently along a sunlit park path, settled into her long-term routine',
+    photo: '/images/covers/life-after-glp1.webp',
   },
 ];
 
@@ -68,6 +72,7 @@ const tools = [
           tagline={phase.tagline}
           description={phase.description}
           previewAlt={phase.alt}
+          photo={phase.photo}
         />
       ))}
     </div>
@@ -109,9 +114,15 @@ const tools = [
   }
 
   .blueprint__phases {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-3);
+  }
+
+  @media (min-width: 900px) {
+    .blueprint__phases {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .blueprint__chips {
