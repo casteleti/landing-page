@@ -23,7 +23,7 @@ export const YEAR = new Date().getFullYear();
 export const HERO_VARIANT: HeroVariant = 'a';
 export const GUARANTEE_DAYS = 7; // pending confirmation with checkout platform + UK consumer rights
 
-export const SITE_URL = 'https://www.wellspringflow.com'; // placeholder canonical domain
+export const SITE_URL = 'https://lp.wellspringflow.com';
 export const SITE_TITLE =
   'The GLP-1 Success Blueprint™ — Practical Guides for Your GLP-1 Journey';
 export const SITE_DESCRIPTION =

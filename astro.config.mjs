@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://www.wellspringflow.com',
+  site: 'https://lp.wellspringflow.com',
   output: 'static',
   compressHTML: true,
   build: {
