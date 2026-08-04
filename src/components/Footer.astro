@@ -8,8 +8,8 @@ import { SUPPORT_EMAIL, BRAND_NAME, YEAR } from '../config';
     <img
       class="footer__logo"
       src="/images/logo-full-neg.webp"
-      width="440"
-      height="77"
+      width="689"
+      height="120"
       alt={BRAND_NAME}
       loading="lazy"
       decoding="async"
@@ -54,8 +54,12 @@ import { SUPPORT_EMAIL, BRAND_NAME, YEAR } from '../config';
   }
 
   .footer__logo {
+    /* footer__inner is a flex column, so the default align-items:stretch would
+       pull the logo to full container width with its height pinned. */
+    align-self: flex-start;
     width: auto;
     height: 34px;
+    object-fit: contain;
     margin-bottom: var(--space-1);
   }
 

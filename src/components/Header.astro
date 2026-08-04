@@ -11,11 +11,23 @@ const headerCtaLabel = `Get Access — ${PRICE}`;
 <header class="site-header" id="header">
   <div class="container site-header__inner">
     <a href="#hero" class="site-header__logo" aria-label={`${BRAND_NAME} — home`}>
+      {/* Below 400px the full lockup plus the CTA can't both fit, so the mark
+          stands in rather than letting the lockup get squeezed out of ratio. */}
       <img
+        class="site-header__logo-mark"
+        src="/images/logo-mark.webp"
+        width="128"
+        height="128"
+        alt=""
+        fetchpriority="high"
+        decoding="async"
+      />
+      <img
+        class="site-header__logo-full"
         src="/images/logo-full.webp"
-        width="440"
-        height="77"
-        alt={BRAND_NAME}
+        width="689"
+        height="120"
+        alt=""
         fetchpriority="high"
         decoding="async"
       />
@@ -65,17 +77,38 @@ const headerCtaLabel = `Get Access — ${PRICE}`;
 
   .site-header__logo {
     display: block;
-    flex-shrink: 1;
-    min-width: 0;
+    /* Must not shrink: the global `img { max-width: 100% }` would then clamp the
+       width while height stays fixed, distorting the lockup. */
+    flex-shrink: 0;
+    line-height: 0;
   }
 
   .site-header__logo img {
     width: auto;
+    object-fit: contain; /* belt-and-braces: never stretch, whatever the box does */
+  }
+
+  .site-header__logo-mark {
+    height: 32px;
+  }
+
+  .site-header__logo-full {
+    display: none;
     height: 30px;
   }
 
+  @media (min-width: 400px) {
+    .site-header__logo-mark {
+      display: none;
+    }
+
+    .site-header__logo-full {
+      display: block;
+    }
+  }
+
   @media (min-width: 900px) {
-    .site-header__logo img {
+    .site-header__logo-full {
       height: 40px;
     }
   }

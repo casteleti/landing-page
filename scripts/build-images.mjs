@@ -51,27 +51,27 @@ for (const [key, { slug, crop }] of Object.entries(COVERS)) {
   console.log('cover  ', slug);
 }
 
-// Hero: rendered up to ~540 CSS px wide -> keep native 928x1152 (~2x retina).
-await sharp(path.join(SRC, 'site-001.png'))
-  .webp({ quality: 78, effort: 6 })
-  .toFile(path.join(OUT, 'hero-blueprint.webp'));
-console.log('hero    hero-blueprint');
-
 // ---- Brand logo -------------------------------------------------------------
 // 02-* is the horizontal lockup (mark + wordmark); 04-positivo is the mark alone.
-await sharp(path.join(LOGO, '02-positivo.png'))
-  .resize(440, 77, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-  .webp({ quality: 92, effort: 6, alphaQuality: 100 })
-  .toFile(path.join(OUT, 'logo-full.webp'));
-await sharp(path.join(LOGO, '02-negativo.png'))
-  .resize(440, 77, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-  .webp({ quality: 92, effort: 6, alphaQuality: 100 })
-  .toFile(path.join(OUT, 'logo-full-neg.webp'));
+// Resize by HEIGHT only. Passing both dimensions with fit:'contain' padded the
+// lockup to a ratio that no longer matched the master, and the markup then
+// declared that wrong ratio to the browser.
+const LOGO_H = 120; // 3x the 40px desktop render
+for (const [src, out] of [
+  ['02-positivo.png', 'logo-full.webp'],
+  ['02-negativo.png', 'logo-full-neg.webp'],
+]) {
+  const { width, height } = await sharp(path.join(LOGO, src))
+    .resize({ height: LOGO_H })
+    .webp({ quality: 92, effort: 6, alphaQuality: 100 })
+    .toFile(path.join(OUT, out));
+  console.log(`logo    ${out} ${width}x${height}`);
+}
 await sharp(path.join(LOGO, '04-positivo.png'))
   .resize(128, 128)
   .webp({ quality: 92, effort: 6, alphaQuality: 100 })
   .toFile(path.join(OUT, 'logo-mark.webp'));
-console.log('logo    logo-full / logo-full-neg / logo-mark');
+console.log('logo    logo-mark 128x128');
 
 // Favicons come from the mark so the tab icon matches the brand.
 await sharp(path.join(LOGO, '04-positivo.png'))
@@ -94,13 +94,14 @@ await sharp(path.join(SRC, 'digital-01.png'))
   .toFile(path.join(OUT, 'digital-tablet.webp'));
 console.log('device  digital-tablet');
 
-// v2 hero: reading a guide on a phone — the digital product in use.
-await sharp(path.join(SRC, 'digital-03.png'))
-  .extract({ left: 329, top: 0, width: 922, height: 1152 })
+// Shared hero for both landing pages: examining the injector pen in her own
+// kitchen. Master is 1283x1395, cropped to the 4:5 the hero slot renders.
+await sharp(path.join(SRC, '90893ss7.png'))
+  .extract({ left: 62, top: 0, width: 1116, height: 1395 })
   .resize(928, 1160, { fit: 'cover' })
   .webp({ quality: 78, effort: 6 })
-  .toFile(path.join(OUT, 'hero-phone.webp'));
-console.log('hero    hero-phone');
+  .toFile(path.join(OUT, 'hero-pen.webp'));
+console.log('hero    hero-pen');
 
 // Front card of the Section 8 collage. Renders around 235 CSS px wide, so it
 // needs a tighter framing on her and the tablet than the Section 9 version.
@@ -142,8 +143,10 @@ const OG_W = 1200;
 const OG_H = 630;
 const PHOTO_W = 520;
 
-const ogPhoto = await sharp(path.join(SRC, 'site-001.png'))
-  .extract({ left: 0, top: 40, width: 928, height: 1083 })
+// Same master as the hero, so an ad click lands on a page that looks like the
+// card the visitor just tapped.
+const ogPhoto = await sharp(path.join(SRC, '90893ss7.png'))
+  .extract({ left: 66, top: 0, width: 1151, height: 1395 })
   .resize(PHOTO_W, OG_H, { fit: 'cover', position: 'centre' })
   .toBuffer();
 
